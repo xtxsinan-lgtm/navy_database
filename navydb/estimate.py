@@ -71,6 +71,8 @@ def run(con):
             planned = r["status"] == "planned"
             if not planned:
                 est = min(est, TODAY_YEAR)
+            else:
+                est = min(max(est, TODAY_YEAR), TODAY_YEAR + 6)     # projections only: clamp to 2026-2032
             if first_year and est < first_year and not before:
                 est = first_year
             con.execute("UPDATE ship SET service_year=?, service_year_estimated=1, service_year_est_basis=?, service_year_est_confidence=? WHERE id=?",

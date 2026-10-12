@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 
 NAME_H = re.compile(r"^(name|ship|vessel|boat|hull|unit|舰名|艦名|名称|名稱)", re.I)
 PEND_H = re.compile(r"舷号|舷號|pennant|hull|hull no|number|^no\.?$|^id$|identification|^p\.? ?no|designation", re.I)
-DATE_H = re.compile(r"服役|服役时间|入役|入列|commission|in service|service entry|entered service|entry into service|enter service|"
+DATE_H = re.compile(r"^comm\.?$|^comm\b|服役|服役时间|入役|入列|commission|in service|service entry|entered service|entry into service|enter service|"
                     r"^service$|^date$|^accepted|^delivered|^completed", re.I)
 SKIP_H = re.compile(r"开工|下水|退役|除役|laid down|launched|builder|shipyard|decommission|fate|retired", re.I)
 DATE_RE = re.compile(r"(\d{1,2}\s+\w+\s+(?:19|20)\d\d|\w+\s+\d{1,2},\s+(?:19|20)\d\d|\w+\s+(?:19|20)\d\d|(?:19|20)\d\d(?:-\d\d(?:-\d\d)?)?)")
@@ -25,8 +25,10 @@ INACTIVE_RE = re.compile(r"退役|除役|沉没|沉沒|报废|報廢|出售|转�
 
 
 def classify(status_txt, decom_txt):
-    if decom_txt and re.search(r"(19|20)\d\d", decom_txt):
-        return "inactive"
+    if decom_txt:
+        yrs = [int(y) for y in re.findall(r"(?:19|20)\d\d", decom_txt)]
+        if yrs and min(yrs) <= 2026:        # a future / planned decommissioning date does not make a ship inactive today
+            return "inactive"
     if status_txt:
         if INACTIVE_RE.search(status_txt) and not re.search(r"^in service|^active", status_txt, re.I):
             return "inactive"
@@ -97,13 +99,15 @@ def tables(html, any_class=False):
         def _looks_header(r):
             return sum(1 for t, _ in r if t and (NAME_H.search(t) or DATE_H.search(t) or PEND_H.search(t) or STATUS_H.search(t) or t == "序号")) >= 3
 
-        hi = next((i for i, r in enumerate(grid[:4]) if sum(1 for _, th in r if th) >= 3 or _looks_header(r)), None)
+        hi = next((i for i, r in enumerate(grid[:4]) if len({t for t, _ in r}) >= 3 and (sum(1 for _, th in r if th) >= 3 or _looks_header(r))), None)
         if hi is None:
             continue
         hdr = [t for t, _ in grid[hi]]
         di = next((i for i, h in enumerate(hdr) if DATE_H.search(h) and not SKIP_H.search(h)), None)
         ni = next((i for i, h in enumerate(hdr) if NAME_H.search(h)), None)
         pi0 = next((i for i, h in enumerate(hdr) if re.search(r"舷号|舷號", h)), None)
+        if ni is None and hdr and hdr[0] == "" and len(hdr) > 3:
+            ni = 0              # tables whose first (ship name) column has a blank header
         if ni is None and pi0 is not None:
             ni = pi0        # e.g. PLAN submarines: only hull numbers, no names
         if di is None or ni is None:

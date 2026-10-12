@@ -20,6 +20,9 @@ SUPPLEMENT = {
     "TR": ["List of patrol vessels of the Turkish Navy", "List of submarines of the Turkish Navy",
            "List of amphibious warfare vessels of the Turkish Navy"],
 }
+SHIP_PREFIX = {"HMAS": "AU", "HMNZS": "NZ", "HMCS": "CA", "HNLMS": "NL", "HNLMS ": "NL", "HDMS": "DK", "KNM": "NO", "HSwMS": "SE", "HMS": "GB",
+               "FGS": "DE", "ITS": "IT", "SPS": "ES", "NRP": "PT", "HS": "GR", "ORP": "PL", "ROU": "RO", "BNS": "BE", "TCG": "TR", "ROKS": "KR",
+               "JS": "JP", "JDS": "JP", "INS": "IN", "FS": "FR", "ROCS": "TW", "BRP": "PH", "USS": "US", "HNoMS": "NO", "FNS": "FI", "HHMS": "GR", "BGS": "BG"}
 NAVY = {"TW": "ROC Navy (Taiwan)", "PH": "Philippine Navy", "CA": "Royal Canadian Navy", "AU": "Royal Australian Navy", "NZ": "Royal New Zealand Navy", "DE": "German Navy", "IT": "Italian Navy",
         "ES": "Spanish Navy", "NL": "Royal Netherlands Navy", "NO": "Royal Norwegian Navy", "DK": "Royal Danish Navy", "SE": "Swedish Navy",
         "FI": "Finnish Navy", "PL": "Polish Navy", "GR": "Hellenic Navy", "PT": "Portuguese Navy", "RO": "Romanian Naval Forces",
@@ -52,6 +55,8 @@ def main():
         pagecount.setdefault(c["page"], set()).add(c["country"])
         revgroup.setdefault((c["country"], c["revid"]), []).append(c["page"])
     shared_rev = {pg for pages in revgroup.values() if len(pages) > 1 for pg in pages}
+    HINTS = {k: v for k, v in json.load(open(ROOT / "data" / "ship_country_hints.json")).items() if not k.startswith("_")}
+    shared_any = {pg for pg, cs in ((c["page"], {x["country"] for x in classes if x["page"] == c["page"]}) for c in classes) if len(cs) > 1}
 
     def stem(page):
         return re.sub(r"[-\s]class.*$", "", page, flags=re.I).strip().lower()
@@ -99,7 +104,22 @@ def main():
         own = COUNTRY_WORDS[r["country"]]
         if re.search(ALL_NATIONS, ctx, re.I) and not re.search(own, ctx, re.I):
             continue
-        if len(pagecount[r["class_page"]]) > 1 and not re.search(COUNTRY_WORDS[r["country"]], r["section"], re.I) \
+        hint = HINTS.get(r["class_page"])
+        if hint:
+            nm_ = re.sub(r"^[A-Za-z]+\s+", "", r["name"] or "")
+            owner = next((cc for cc, names in hint.items() if cc not in ("rest",) and any(n.lower() in (r["name"] or "").lower() or n.lower() == nm_.lower() for n in names)), hint["rest"])
+            if owner != r["country"]:
+                continue
+        ctx_own = bool(re.search(COUNTRY_WORDS[r["country"]], ctx, re.I))
+        pm = re.match(r"([A-Za-z]+)\s", r["name"] or "")
+        pc = SHIP_PREFIX.get(pm.group(1)) if pm else None
+        if pc and pc != r["country"] and r["class_page"] in shared_any:
+            continue                                      # ship belongs to another navy on a shared page
+        if pc == r["country"]:
+            pass
+        elif hint:
+            pass
+        elif len(pagecount[r["class_page"]]) > 1 and not ctx_own \
                 and not re.search(COUNTRY_WORDS[r["country"]], r.get("class_raw") or "", re.I):
             continue
         if r["class_page"] in shared_rev:
