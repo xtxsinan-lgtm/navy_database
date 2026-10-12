@@ -1,2 +1,4 @@
 requests
 mwparserfromhell
+beautifulsoup4
+lxml

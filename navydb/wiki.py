@@ -12,13 +12,16 @@ def _get(params):
     f = CACHE / f"{key}.json"
     if f.exists():
         return json.loads(f.read_text())
-    for i in range(4):
+    for i in range(8):
         try:
             r = requests.get(API, params={**params, "format": "json", "formatversion": 2},
                              headers=UA, timeout=30)
+            if r.status_code == 429 or not r.headers.get("content-type", "").startswith("application/json"):
+                time.sleep(min(float(r.headers.get("Retry-After", 0) or 0) or 15 * (i + 1), 120))
+                continue
             r.raise_for_status()
             f.write_text(r.text)
-            time.sleep(0.2)
+            time.sleep(1.0)
             return r.json()
         except requests.RequestException:
             time.sleep(2 ** (i + 1))
@@ -34,3 +37,10 @@ def wikitext(title):
         return None, None
     rev = p["revisions"][0]
     return rev["slots"]["main"]["content"], rev["revid"]
+
+
+def html(title):
+    """Rendered page HTML (templates expanded) and revid."""
+    d = _get({"action": "parse", "page": title, "prop": "text|revid", "redirects": 1,
+              "disablelimitreport": 1, "disableeditsection": 1})
+    return d["parse"]["text"], d["parse"]["revid"]
