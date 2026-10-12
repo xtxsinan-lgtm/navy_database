@@ -244,6 +244,9 @@
     "cells": 24,
     "raw": "Type 093B 24-cell VLS"
    }
-  ]
+  ],
+  "disp": 7000,
+  "basis": "submerged",
+  "disp_est": "ESTIMATE: zh.wikipedia 中国人民解放军海军现役舰艇列表 gives 水下排水量 7000吨 for the 09III (Shang) class; rounded, applied to all variants (093/093A/093B), not in the en/zh class infobox"
  }
 }

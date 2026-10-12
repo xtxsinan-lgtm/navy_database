@@ -438,6 +438,8 @@ def main():
             for col, key in (("displacement_full_t", "disp"), ("displacement_basis", "basis"), ("service_start", "svc")):
                 if key in o:
                     sets.append(f"{col}=?"); args.append(o[key] if key != "svc" else str(o[key]))
+            if o.get("disp_est"):
+                sets.append("displacement_estimated=1"); sets.append("displacement_est_note=?"); args.append(o["disp_est"])
             sets.append("note=coalesce(note||'; ','')||?"); args.append("manual review: " + o.get("src", ""))
             con.execute(f"UPDATE ship_class SET {', '.join(sets)} WHERE id=?", (*args, k))
             if "radars" in o:
