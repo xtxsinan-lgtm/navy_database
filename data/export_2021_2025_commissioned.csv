@@ -1,0 +1,188 @@
+group,country,class,ship,pennant,commissioned_source,service_year,year_is_estimated,est_basis,class_displacement_t,displacement_basis,status
+CN,CN,Type 052D destroyer,苏州 / Suzhou,132,2021-01-15,2021,0,,7700.0,full,active
+CN,CN,Type 052D destroyer,淮南 / Huainan,123,2021-02-11,2021,0,,7700.0,full,active
+CN,CN,Type 052D destroyer,南宁 / Nanning,162,2021-04-12,2021,0,,7700.0,full,active
+CN,CN,Type 052D destroyer,开封 / Kaifeng,124,2021-04-16,2021,0,,7700.0,full,active
+CN,CN,Type 052D destroyer,桂林 / Guilin,164,2021-09,2021,0,,7700.0,full,active
+CN,CN,Type 052D destroyer,湛江 / Zhanjiang,165,2021-12-25,2021,0,,7700.0,full,active
+CN,CN,Type 052D destroyer,包头 / Baotou,133,2021-12-28,2021,0,,7700.0,full,active
+CN,CN,Type 055 destroyer,拉萨／ Lhasa,102,2021-03-02,2021,0,,13000.0,full,active
+CN,CN,Type 055 destroyer,大连／ Dalian,105,2021-04-23,2021,0,,13000.0,full,active
+CN,CN,Type 055 destroyer,鞍山／ Anshan,103,2021-11-11,2021,0,,13000.0,full,active
+CN,CN,Type 056 corvette,商丘 / Shangqiu,618,2021-02,2021,0,,1500.0,other,active
+CN,CN,Type 056 corvette,十堰 / Shiyan,637,2021-02-04,2021,0,,1500.0,other,active
+CN,CN,Type 056 corvette,东营 / Dongying,607,2021-01,2021,0,,1500.0,other,active
+CN,CN,Type 056 corvette,济宁 / Jining,636,2021,2021,0,,1500.0,other,active
+CN,CN,Type 056 corvette,天门 / Tianmen,631,2021-01,2021,0,,1500.0,other,active
+CN,CN,Type 056 corvette,铜陵 / Tongling,629,2021-01,2021,0,,1500.0,other,active
+CN,CN,Type 056 corvette,石嘴山 / Shizuishan,609,2021-01,2021,0,,1500.0,other,active
+CN,CN,Type 056 corvette,南阳 / Nanyang,619,2021-01-30,2021,0,,1500.0,other,active
+CN,CN,Type 056 corvette,阿坝 / Aba,630,2021-01,2021,0,,1500.0,other,active
+CN,CN,Type 075 landing helicopter dock,Hainan,31,2021-04-23,2021,0,,40000.0,other,active
+CN,CN,Type 094 submarine,Changzheng 18,421,2021-04-23,2021,0,,11000.0,submerged,active
+CN,CN,Type 052D destroyer,焦作 / Jiaozuo,163,2022-01-17,2022,0,,7700.0,full,active
+CN,CN,Type 052D destroyer,绍兴 / Shaoxing,134,2022-02,2022,0,,7700.0,full,active
+CN,CN,Type 052D destroyer,丽水 / Lishui,157,2022-06,2022,0,,7700.0,full,active
+CN,CN,Type 054A frigate,资阳 / Ziyang,522,2022-05-27,2022,0,,3963.0,full,active
+CN,CN,Type 054A frigate,鹤壁 / Hebi,534,2022-12,2022,0,,3963.0,full,active
+CN,CN,Type 054A frigate,巴彦淖尔市 / Bayannao'er,551,2022-12,2022,0,,3963.0,full,active
+CN,CN,Type 054A frigate,红河 / Honghe,523,2022-12,2022,0,,3963.0,full,active
+CN,CN,Type 054A frigate,图赫里勒 （PNS Tughril ）,261,2022-01-24,2022,0,,3963.0,full,active
+CN,CN,Type 054A frigate,帖木儿 （PNS Taimur ）,262,2022-06-23,2022,0,,3963.0,full,active
+CN,CN,Type 055 destroyer,延安 / Yan'an,106,2022-02,2022,0,,13000.0,full,active
+CN,CN,Type 055 destroyer,无锡／Wuxi,104,2022-03,2022,0,,13000.0,full,active
+CN,CN,Type 055 destroyer,遵义 / Zunyi,107,2022-11,2022,0,,13000.0,full,active
+CN,CN,Type 055 destroyer,咸阳 / Xianyang,108,2022-12,2022,0,,13000.0,full,active
+CN,CN,Type 075 landing helicopter dock,Guangxi,32,2022-04,2022,0,,40000.0,other,active
+CN,CN,Type 075 landing helicopter dock,Anhui,33,2022-10-01,2022,0,,40000.0,other,active
+CN,CN,Type 054A frigate,西昌 / Xichang,540,2023,2023,0,,3963.0,full,active
+CN,CN,Type 054A frigate,宜兴 / Yixing,537,2023-01,2023,0,,3963.0,full,active
+CN,CN,Type 054A frigate,淮北 / Huaibei,516,2023-07,2023,0,,3963.0,full,active
+CN,CN,Type 054A frigate,郴州 / Chenzhou,552,2023-02-09,2023,0,,3963.0,full,active
+CN,CN,Type 054A frigate,大理 / Dali,553,2023-11,2023,0,,3963.0,full,active
+CN,CN,Type 054A frigate,通辽 / Tongliao,554,2023-11-25,2023,0,,3963.0,full,active
+CN,CN,Type 054A frigate,衢州,517,2023-08,2023,0,,3963.0,full,active
+CN,CN,Type 054A frigate,蒂普苏丹 （PNS Tippu Sultan ）,263,2023-05-10,2023,0,,3963.0,full,active
+CN,CN,Type 054A frigate,沙贾汗 （PNS Shah Jahan ）,264,2023-05-10,2023,0,,3963.0,full,active
+CN,CN,Type 056 corvette,El Moutassadi,940,2023,2023,0,,1500.0,other,active
+CN,CN,Type 054A frigate,臨汾 / Linfen,543,2024,2024,0,,3963.0,full,active
+CN,CN,Type 054A frigate,鄂尔多斯 / Ordos,580,2024,2024,0,,3963.0,full,active
+CN,CN,Type 093 submarine,长征3,,2024,2024,0,,,,active
+CN,CN,Chinese aircraft carrier Fujian,Fujian,,2025-11-05,2025,0,,80000.0,full,active
+CN,CN,Type 052D destroyer,沧州 / Cangzhou,125,2025-04-19,2025,0,,7700.0,full,active
+CN,CN,Type 052D destroyer,菏泽 / Heze,126,2025-07-23,2025,0,,7700.0,full,active
+CN,CN,Type 052D destroyer,驻马店 / Zhumadian,127,2025-11-02,2025,0,,7700.0,full,active
+CN,CN,Type 052D destroyer,达州 / Dazhou,135,2025-02-02,2025,0,,7700.0,full,active
+CN,CN,Type 052D destroyer,渭南 / Weinan,166,2025-02-23,2025,0,,7700.0,full,active
+CN,CN,Type 052D destroyer,娄底 / Loudi,176,2025-11-05,2025,0,,7700.0,full,active
+CN,CN,Type 052D destroyer,宿州,158,2025-03-14,2025,0,,7700.0,full,active
+CN,CN,Type 054A frigate,阜阳,519,2025-08,2025,0,,3963.0,full,active
+CN,CN,Type 054A frigate,玉溪,535,2025-10,2025,0,,3963.0,full,active
+CN,CN,Type 054B frigate,漯河 / Luohe,545,2025-01-22,2025,0,,6000.0,full,active
+CN,CN,Type 054B frigate,钦州 / Qinzhou,555,2025-04-23,2025,0,,6000.0,full,active
+CN,CN,Type 075 landing helicopter dock,Hubei,34,2025-08-01,2025,0,,40000.0,other,active
+CN,CN,Type 093 submarine,长征4,,2025,2025,0,,,,active
+RU,RU,Alexandrit-class minesweeper,Georgiy Kurbatov,,2021-08-20,2021,0,,890.0,full,active
+RU,RU,Alexandrit-class minesweeper,Georgy Kurbatov,,2021,2021,0,,890.0,full,active
+RU,RU,Borei-class submarine,Knyaz Oleg,,2021-12-21,2021,0,,24000.0,submerged,active
+RU,RU,Buyan-class corvette,Grayvoron,600,2021,2021,0,,508.0,full,active
+RU,RU,Yasen-class submarine,Kazan,,2021-05-05,2021,0,,13800.0,submerged,active
+RU,RU,Yasen-class submarine,Novosibirsk,,2021-12-21,2021,0,,13800.0,submerged,active
+RU,RU,Alexandrit-class minesweeper,Pyotr Ilyichev,,2022-11-16,2022,0,,890.0,full,active
+RU,RU,Alexandrit-class minesweeper,Anatoly Shlemov,,2022-12-29,2022,0,,890.0,full,active
+RU,RU,Borei-class submarine,Generalissimus Suvorov,,2022-12-29,2022,0,,24000.0,submerged,active
+RU,RU,Buyan-class corvette,Grad,575,2022,2022,0,,508.0,full,active
+RU,RU,Ivan Gren-class landing ship,Vladimir Andreyev,,,2022,1,extrapolated after sister 2020 (gap 2.0y/ship),6600.0,full,unknown
+RU,RU,Oscar-class submarine,Belgorod,K-329,2022-07-08,2022,0,,19400.0,submerged,active
+RU,RU,Admiral Gorshkov-class frigate,Admiral Golovko,,2023-12-25,2023,0,,5400.0,full,active
+RU,RU,Alexandrit-class minesweeper,Lev Chernavin,,2023-12-25,2023,0,,890.0,full,active
+RU,RU,Borei-class submarine,Imperator Aleksandr III,,2023-12-11,2023,0,,24000.0,submerged,active
+RU,RU,Buyan-class corvette,Naro-Fominsk,595,2023,2023,0,,508.0,full,active
+RU,RU,Karakurt-class corvette,Tsiklon,,2023-07-12,2023,0,,860.0,other,unknown
+RU,RU,Karakurt-class corvette,Askold (ex- Musson ),,,2023,1,interpolated between sisters 2020 and 2026,860.0,other,unknown
+RU,RU,Steregushchiy-class corvette,Merkury,535,2023-05-13,2023,0,,2200.0,full,active
+RU,RU,Steregushchiy-class corvette,Rezkiy,343,2023-09-14,2023,0,,2200.0,full,active
+RU,RU,Yasen-class submarine,Krasnoyarsk,,2023-12-11,2023,0,,13800.0,submerged,active
+RU,RU,Karakurt-class corvette,Amur (ex- Passat ),,2024-08-26,2024,0,,860.0,other,active
+RU,RU,Karakurt-class corvette,Tucha,,2024-12-21,2024,0,,860.0,other,active
+RU,RU,Lada-class submarine,Kronshtadt,,2024-01-31,2024,0,,2743.0,submerged,active
+RU,RU,Yasen-class submarine,Arkhangelsk,,2024-12-27,2024,0,,13800.0,submerged,active
+RU,RU,Alexandrit-class minesweeper,Afanasy Ivannikov,,2025-05-07,2025,0,,890.0,full,active
+RU,RU,Borei-class submarine,Knyaz Pozharskiy,,2025-07-24,2025,0,,24000.0,submerged,active
+RU,RU,Borei-class submarine,Knyaz Pozharsky,K-555,2025,2025,0,,24000.0,submerged,active
+RU,RU,Buyan-class corvette,Stavropol,,2025,2025,0,,508.0,full,active
+RU,RU,Karakurt-class corvette,Taifun,,2025-08-28,2025,0,,860.0,other,unknown
+RU,RU,Karakurt-class corvette,Typhoon,?,2025,2025,0,,860.0,other,active
+RU,RU,Lada-class submarine,Velikiye Luki,,2025-12-16,2025,0,,2743.0,submerged,active
+NATO-TR+JP+PH+TW+AU+NZ,AU,Arafura-class patrol vessel,Arafura,OPV 203,2025-06-28,2025,0,,1640.0,other,active
+NATO-TR+JP+PH+TW+AU+NZ,CA,Harry DeWolf-class offshore patrol vessel,Margaret Brooke,AOPV 431,2021-07-15,2021,0,,6615.0,other,active
+NATO-TR+JP+PH+TW+AU+NZ,CA,Harry DeWolf-class offshore patrol vessel,Max Bernays,AOPV 432,2022-09-02,2022,0,,6615.0,other,active
+NATO-TR+JP+PH+TW+AU+NZ,CA,Harry DeWolf-class offshore patrol vessel,William Hall,AOPV 433,2023-08-31,2023,0,,6615.0,other,active
+NATO-TR+JP+PH+TW+AU+NZ,CA,Harry DeWolf-class offshore patrol vessel,Frédérick Rolette,AOPV 434,2024-08-29,2024,0,,6615.0,other,active
+NATO-TR+JP+PH+TW+AU+NZ,CA,Harry DeWolf-class offshore patrol vessel,Robert Hampton Gray,AOPV 435,2025-08-21,2025,0,,6615.0,other,unknown
+NATO-TR+JP+PH+TW+AU+NZ,DE,Baden-Württemberg-class frigate,Sachsen-Anhalt,F224,2021-05-17,2021,0,,7200.0,other,active
+NATO-TR+JP+PH+TW+AU+NZ,DE,Baden-Württemberg-class frigate,Rheinland-Pfalz,F225,2022-07-13,2022,0,,7200.0,other,active
+NATO-TR+JP+PH+TW+AU+NZ,ES,S-80 Plus-class submarine,Isaac Peral,S-81,2023-11-30,2023,0,,2965.0,submerged,active
+NATO-TR+JP+PH+TW+AU+NZ,ES,Spanish ship Juan Carlos I,Anadolu,L-400,2023-04-10,2023,0,,26000.0,other,active
+NATO-TR+JP+PH+TW+AU+NZ,FR,FREMM multipurpose frigate,Alsace,D656,2021-04-16,2021,0,,6700.0,standard,active
+NATO-TR+JP+PH+TW+AU+NZ,FR,FREMM multipurpose frigate,Lorraine,D657,2023-11-13,2023,0,,6700.0,standard,active
+NATO-TR+JP+PH+TW+AU+NZ,FR,Suffren-class submarine,Duguay-Trouin,S636,2023-07-28,2023,0,,5300.0,submerged,active
+NATO-TR+JP+PH+TW+AU+NZ,FR,Suffren-class submarine,Tourville,S637,2024-11-16,2024,0,,5300.0,submerged,active
+NATO-TR+JP+PH+TW+AU+NZ,FR,Amiral Ronarc'h-class frigate,Kimon,F-601,2025-12-18,2025,0,,4460.0,other,active
+NATO-TR+JP+PH+TW+AU+NZ,GB,River-class patrol vessel,Spey,P234,2021-06-18,2021,0,,2000.0,other,active
+NATO-TR+JP+PH+TW+AU+NZ,GB,Astute-class submarine,Anson,S123,2022-08-31,2022,0,,7800.0,submerged,active
+NATO-TR+JP+PH+TW+AU+NZ,GB,Astute-class submarine,Agamemnon,S124,2025-09-22,2025,0,,7800.0,submerged,active
+NATO-TR+JP+PH+TW+AU+NZ,GR,Type 209 submarine,S44,,2021,2021,0,,,,unknown
+NATO-TR+JP+PH+TW+AU+NZ,GR,Type 209 submarine,Alugoro,405,2021,2021,0,,,,unknown
+NATO-TR+JP+PH+TW+AU+NZ,GR,Roussen-class fast attack craft,"Lieutenant Panagiotis Vlachakos, killed on 31 January 1996, during the Imia crisis , when the AB 212 helicopter PN 21 crashed into the sea",P 79,2022-09-29,2022,0,,668.0,full,active
+NATO-TR+JP+PH+TW+AU+NZ,IT,Thaon di Revel-class patrol vessel,Paolo Thaon di Revel,6261,2022-03-18,2022,0,,6270.0,full,active
+NATO-TR+JP+PH+TW+AU+NZ,IT,Thaon di Revel-class patrol vessel,Francesco Morosini,6262,2022-10-22,2022,0,,6270.0,full,active
+NATO-TR+JP+PH+TW+AU+NZ,IT,Thaon di Revel-class patrol vessel,Raimondo Montecuccoli,6263,2023-09-27,2023,0,,6270.0,full,active
+NATO-TR+JP+PH+TW+AU+NZ,IT,Thaon di Revel-class patrol vessel,Giovanni delle Bande Nere,6264,2024-10-02,2024,0,,6270.0,full,active
+NATO-TR+JP+PH+TW+AU+NZ,IT,FREMM multipurpose frigate,Spartaco Schergat,F598,2025-04-15,2025,0,,6700.0,standard,unknown
+NATO-TR+JP+PH+TW+AU+NZ,IT,FREMM multipurpose frigate,Emilio Bianchi,F599,2025-07-30,2025,0,,6700.0,standard,unknown
+NATO-TR+JP+PH+TW+AU+NZ,JP,Awaji-class minesweeper,Etajima,MSO-306,2021-03-16,2021,0,,690.0,standard,active
+NATO-TR+JP+PH+TW+AU+NZ,JP,Maya-class destroyer,JS Haguro,DDG-180,2021-03-19,2021,0,,10250.0,full,active
+NATO-TR+JP+PH+TW+AU+NZ,JP,Sōryū-class submarine,Tōryū,SS-512,2021-03-24,2021,0,,4200.0,submerged,active
+NATO-TR+JP+PH+TW+AU+NZ,JP,Mogami-class frigate,Mogami,FFM-1,2022-04-28,2022,0,,5500.0,full,active
+NATO-TR+JP+PH+TW+AU+NZ,JP,Mogami-class frigate,Kumano,FFM-2,2022-03-22,2022,0,,5500.0,full,active
+NATO-TR+JP+PH+TW+AU+NZ,JP,Mogami-class frigate,Noshiro,FFM-3,2022-12-15,2022,0,,5500.0,full,active
+NATO-TR+JP+PH+TW+AU+NZ,JP,Taigei-class submarine,Taigei (たいげい),SS-513 SSE-6201,2022-03-09,2022,0,,3000.0,standard,active
+NATO-TR+JP+PH+TW+AU+NZ,JP,Mogami-class frigate,Mikuma,FFM-4,2023-03-07,2023,0,,5500.0,full,active
+NATO-TR+JP+PH+TW+AU+NZ,JP,Taigei-class submarine,Hakugei (はくげい),SS-514,2023-03-20,2023,0,,3000.0,standard,active
+NATO-TR+JP+PH+TW+AU+NZ,JP,Mogami-class frigate,Yahagi,FFM-5,2024-05-21,2024,0,,5500.0,full,active
+NATO-TR+JP+PH+TW+AU+NZ,JP,Mogami-class frigate,Agano,FFM-6,2024-06-20,2024,0,,5500.0,full,active
+NATO-TR+JP+PH+TW+AU+NZ,JP,Taigei-class submarine,Jingei (じんげい),SS-515,2024-03-08,2024,0,,3000.0,standard,active
+NATO-TR+JP+PH+TW+AU+NZ,JP,Awaji-class minesweeper,Nōmi,MSO-307,2025-03-12,2025,0,,690.0,standard,active
+NATO-TR+JP+PH+TW+AU+NZ,JP,Mogami-class frigate,Niyodo,FFM-7,2025-05-21,2025,0,,5500.0,full,active
+NATO-TR+JP+PH+TW+AU+NZ,JP,Mogami-class frigate,Yūbetsu,FFM-8,2025-06-19,2025,0,,5500.0,full,active
+NATO-TR+JP+PH+TW+AU+NZ,JP,Taigei-class submarine,Raigei (らいげい),SS-516,2025-03-06,2025,0,,3000.0,standard,active
+NATO-TR+JP+PH+TW+AU+NZ,NZ,Lake-class inshore patrol vessel,LÉ Aoibhinn (P71),P71,2024-09-04,2024,0,,340.0,full,active
+NATO-TR+JP+PH+TW+AU+NZ,NZ,Lake-class inshore patrol vessel,LÉ Gobnait (P72),P72,2024-09-04,2024,0,,340.0,full,active
+NATO-TR+JP+PH+TW+AU+NZ,PH,Jose Rizal-class frigate,BRP Antonio Luna,FFG-15,2021-02-09,2021,0,,2600.0,other,active
+NATO-TR+JP+PH+TW+AU+NZ,PH,Acero-class gunboat,BRP Nestor Acero,PG-200,2022-09-06,2022,0,,,,active
+NATO-TR+JP+PH+TW+AU+NZ,PH,Acero-class gunboat,BRP Lolinato To-Ong,PG-201,2022-09-06,2022,0,,,,active
+NATO-TR+JP+PH+TW+AU+NZ,PH,Acero-class gunboat,BRP Gener Tinangag,PG-903,2023-04-11,2023,0,,,,active
+NATO-TR+JP+PH+TW+AU+NZ,PH,Acero-class gunboat,BRP Domingo Deluana,PG-905,2023-04-11,2023,0,,,,active
+NATO-TR+JP+PH+TW+AU+NZ,PH,Acero-class gunboat,BRP Herminigildo Yurong,PG-906,2023-11-18,2023,0,,,,active
+NATO-TR+JP+PH+TW+AU+NZ,PH,Acero-class gunboat,BRP Laurence Narag,PG-205,2023-11-18,2023,0,,,,active
+NATO-TR+JP+PH+TW+AU+NZ,PH,Acero-class gunboat,BRP Audrey Bañares,PG-208,,2023,1,interpolated between sisters 2023 and 2023,,,active
+NATO-TR+JP+PH+TW+AU+NZ,PH,Acero-class gunboat,BRP Tomas Campo,PG-908,2024-09-17,2024,0,,,,active
+NATO-TR+JP+PH+TW+AU+NZ,PH,Acero-class gunboat,BRP Albert Majini,PG-909,2024-09-17,2024,0,,,,active
+NATO-TR+JP+PH+TW+AU+NZ,PH,Miguel Malvar-class frigate,BRP Miguel Malvar,FFG-6,2025-05-20,2025,0,,3200.0,other,active
+NATO-TR+JP+PH+TW+AU+NZ,PH,Miguel Malvar-class frigate,BRP Diego Silang,FFG-7,2025-12-02,2025,0,,3200.0,other,active
+NATO-TR+JP+PH+TW+AU+NZ,PL,Kormoran 2-class minehunter,ORP Albatros (602),,2022-11-28,2022,0,,850.0,other,active
+NATO-TR+JP+PH+TW+AU+NZ,PL,Kormoran 2-class minehunter,ORP Mewa (603),,2023-02-14,2023,0,,850.0,other,active
+NATO-TR+JP+PH+TW+AU+NZ,TW,Tuo Chiang-class corvette,PGG-619,PGG-619,2021,2021,0,,685.0,full,active
+NATO-TR+JP+PH+TW+AU+NZ,TW,Yushan-class landing platform dock,LPD-1401,LPD-1401,2022,2022,0,,10600.0,standard,active
+NATO-TR+JP+PH+TW+AU+NZ,TW,Tuo Chiang-class corvette,PGG-620,PGG-620,2023,2023,0,,685.0,full,active
+NATO-TR+JP+PH+TW+AU+NZ,TW,Tuo Chiang-class corvette,PGG-621,PGG-621,2024,2024,0,,685.0,full,active
+NATO-TR+JP+PH+TW+AU+NZ,TW,Tuo Chiang-class corvette,PGG-623,PGG-623,2024,2024,0,,685.0,full,active
+NATO-TR+JP+PH+TW+AU+NZ,TW,Tuo Chiang-class corvette,PGG-625,PGG-625,2024,2024,0,,685.0,full,active
+NATO-TR+JP+PH+TW+AU+NZ,TW,Tuo Chiang-class corvette,PGG-626,PGG-626,2024,2024,0,,685.0,full,active
+NATO-TR+JP+PH+TW+AU+NZ,US,Arleigh Burke-class destroyer,Daniel Inouye,DDG-118,2021-12-08,2021,0,,9855.0,full,active
+NATO-TR+JP+PH+TW+AU+NZ,US,Independence-class littoral combat ship,Mobile,LCS-26,2021-05-22,2021,0,,3104.0,full,active
+NATO-TR+JP+PH+TW+AU+NZ,US,Independence-class littoral combat ship,Oakland,LCS-24,2021-04-17,2021,0,,3104.0,full,active
+NATO-TR+JP+PH+TW+AU+NZ,US,Arleigh Burke-class destroyer,Frank E. Petersen Jr.,DDG-121,2022-05-14,2022,0,,9855.0,full,active
+NATO-TR+JP+PH+TW+AU+NZ,US,Freedom-class littoral combat ship,Minneapolis-Saint Paul,LCS-21,2022-05-21,2022,0,,3500.0,full,active
+NATO-TR+JP+PH+TW+AU+NZ,US,Independence-class littoral combat ship,Savannah,LCS-28,2022-02-05,2022,0,,3104.0,full,active
+NATO-TR+JP+PH+TW+AU+NZ,US,San Antonio-class amphibious transport dock,Fort Lauderdale,LPD-28,2022-07-30,2022,0,,25300.0,full,active
+NATO-TR+JP+PH+TW+AU+NZ,US,Virginia-class submarine,Montana,SSN-794,2022-06-25,2022,0,,10200.0,submerged,active
+NATO-TR+JP+PH+TW+AU+NZ,US,Virginia-class submarine,Oregon,SSN-793,2022-05-28,2022,0,,10200.0,submerged,active
+NATO-TR+JP+PH+TW+AU+NZ,US,Arleigh Burke-class destroyer,Carl M. Levin,DDG-120,2023-06-24,2023,0,,9855.0,full,active
+NATO-TR+JP+PH+TW+AU+NZ,US,Arleigh Burke-class destroyer,Jack H. Lucas,DDG-125,2023-10-07,2023,0,,9855.0,full,active
+NATO-TR+JP+PH+TW+AU+NZ,US,Arleigh Burke-class destroyer,Lenah Sutcliffe Higbee,DDG-123,2023-05-13,2023,0,,9855.0,full,active
+NATO-TR+JP+PH+TW+AU+NZ,US,Freedom-class littoral combat ship,Cooperstown,LCS-23,2023-05-06,2023,0,,3500.0,full,active
+NATO-TR+JP+PH+TW+AU+NZ,US,Freedom-class littoral combat ship,Marinette,LCS-25,2023-09-16,2023,0,,3500.0,full,active
+NATO-TR+JP+PH+TW+AU+NZ,US,Independence-class littoral combat ship,Augusta,LCS-34,2023-09-30,2023,0,,3104.0,full,active
+NATO-TR+JP+PH+TW+AU+NZ,US,Independence-class littoral combat ship,Canberra,LCS-30,2023-07-22,2023,0,,3104.0,full,active
+NATO-TR+JP+PH+TW+AU+NZ,US,Independence-class littoral combat ship,Santa Barbara,LCS-32,2023-04-01,2023,0,,3104.0,full,active
+NATO-TR+JP+PH+TW+AU+NZ,US,Virginia-class submarine,Hyman G. Rickover,SSN-795,2023-10-14,2023,0,,10200.0,submerged,active
+NATO-TR+JP+PH+TW+AU+NZ,US,Arleigh Burke-class destroyer,John Basilone,DDG-122,2024-11-09,2024,0,,9855.0,full,active
+NATO-TR+JP+PH+TW+AU+NZ,US,Freedom-class littoral combat ship,Beloit,LCS-29,2024-11-23,2024,0,,3500.0,full,active
+NATO-TR+JP+PH+TW+AU+NZ,US,Freedom-class littoral combat ship,Nantucket,LCS-27,2024-11-16,2024,0,,3500.0,full,active
+NATO-TR+JP+PH+TW+AU+NZ,US,Independence-class littoral combat ship,Kingsville,LCS-36,2024-08-24,2024,0,,3104.0,full,active
+NATO-TR+JP+PH+TW+AU+NZ,US,San Antonio-class amphibious transport dock,Richard M. McCool Jr.,LPD-29,2024-09-09,2024,0,,25300.0,full,active
+NATO-TR+JP+PH+TW+AU+NZ,US,Virginia-class submarine,New Jersey,SSN-796,2024-09-14,2024,0,,10200.0,submerged,active
+NATO-TR+JP+PH+TW+AU+NZ,US,Independence-class littoral combat ship,Pierre,LCS-38,2025-11-16,2025,0,,3104.0,full,active
+NATO-TR+JP+PH+TW+AU+NZ,US,Virginia-class submarine,Iowa,SSN-797,2025-04-05,2025,0,,10200.0,submerged,active

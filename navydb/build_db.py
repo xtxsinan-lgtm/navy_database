@@ -347,6 +347,76 @@ def main():
             zadded += 1
         print("zh rows added:", zadded, "enriched:", zupd)
 
+
+    # ---- Taiwan (ROCN): zh.wikipedia '中華民國海軍現役艦艇' is the authority (hull number / year in service)
+    tpath = ROOT / "data" / "ships_tw_zh.json"
+    if tpath.exists():
+        TW_MAP = {"基隆級": "Kidd-class destroyer", "成功級": "Cheng Kung-class frigate", "康定級": "Kang Ding-class frigate",
+                  "沱江級": "Tuo Chiang-class corvette", "永豐級": "Yung Feng-class minehunter", "劍龍級": "Hai Lung-class submarine",
+                  "玉山級船塢運輸艦": "Yushan-class landing platform dock"}
+        TW_ONLY = {"茄比級": ("submarine", "Guppy-class submarine (ROCN) 茄比級"), "濟陽級": ("frigate", "Chi Yang-class frigate (ROCN) 濟陽級"),
+                   "錦江級": ("patrol", "Chin Chiang-class patrol vessel 錦江級"), "永靖級": ("mcm", "Yung Jing-class minehunter 永靖級"),
+                   "中和級戰車登陸艦": ("amphibious", "Chung Ho-class tank landing ship 中和級"),
+                   "中海級戰車登陸艦": ("amphibious", "Chung Hai-class tank landing ship 中海級"),
+                   "旭海號船塢登陸艦": ("amphibious", "Hsu Hai landing ship dock 旭海號")}
+        trows = json.load(open(tpath))
+        by = {}
+        for r in trows:
+            if r["section"] == "輔助艦艇":
+                continue
+            if r.get("kind") == "table":
+                page = r["en_class"]
+            elif r["class_zh"] in TW_MAP:
+                page = TW_MAP[r["class_zh"]]
+            elif r["class_zh"] in TW_ONLY:
+                typ, page = TW_ONLY[r["class_zh"]]
+                if ("TW", page) not in cid:
+                    tons = re.search(r"([\d,\.]+)\s*噸", r["tonnage"])
+                    cur = con.execute("INSERT INTO ship_class(country,navy,name,type,page,revid,displacement_full_t,displacement_raw,displacement_basis,note) "
+                                      "VALUES (?,?,?,?,?,?,?,?,?,?)",
+                                      ("TW", NAVY["TW"], page, typ, page, r["rev"], float(tons.group(1).replace(",", "")) if tons else None,
+                                       r["tonnage"], "other", "class created from zh.wikipedia only (no en infobox)"))
+                    cid[("TW", page)] = cur.lastrowid
+            else:
+                continue
+            by.setdefault(page, []).append(r)
+        npen = lambda p: re.sub(r"\D", "", p or "")
+        for page, items_ in by.items():
+            k = cid.get(("TW", page))
+            if not k:
+                continue
+            ex = {npen(p): sid for sid, p in con.execute("select id,pennant from ship where class_id=?", (k,)) if p}
+            ex.update({npen(n): sid for sid, n in con.execute("select id,name from ship where class_id=?", (k,)) if npen(n) not in ex})
+            seen = set()
+            for r in items_:
+                pen = r["pennant"]
+                yr = r.get("year")
+                com = r.get("commissioned") or (yr if yr else None)
+                if r.get("kind") == "table":
+                    st = "inactive" if r["status"] == "inactive" else ("planned" if not com else "active")
+                else:
+                    st = "active" if yr and int(yr) <= 2026 else "planned"
+                sid = ex.get(npen(pen))
+                if sid is not None:
+                    seen.add(sid)
+                    con.execute("UPDATE ship SET pennant=?, commissioned=CASE WHEN commissioned LIKE ? THEN commissioned ELSE ? END, "
+                                "commissioned_raw=CASE WHEN commissioned LIKE ? THEN commissioned_raw ELSE ? END, status=?, status_basis='zh-wiki', "
+                                "status_raw=? WHERE id=?",
+                                (pen, (com or "x")[:4] + "%", com, (com or "x")[:4] + "%", "zh:" + (com or ""), st, r.get("status_raw") or r["section"], sid))
+                else:
+                    cur = con.execute("INSERT INTO ship(class_id,country,name,pennant,commissioned,commissioned_raw,status,status_raw,status_basis,source_page,source_rev) "
+                                      "VALUES (?,?,?,?,?,?,?,?,?,?,?)",
+                                      (k, "TW", r.get("name") or pen, pen, com, ("zh:" + com) if com else None, st, r["section"], "zh-wiki",
+                                       "zh:中華民國海軍現役艦艇", r["rev"]))
+                    seen.add(cur.lastrowid)
+            for sid, in con.execute("select id from ship where class_id=? and status!='planned'", (k,)).fetchall():
+                if sid not in seen:
+                    if page == "Kidd-class destroyer":      # the former USS names of the same hulls (now DDG-1801..1805)
+                        con.execute("DELETE FROM ship WHERE id=?", (sid,))
+                    else:
+                        con.execute("UPDATE ship SET status='inactive', status_basis='absent from zh active list' WHERE id=?", (sid,))
+        print("Taiwan classes from zh:", len(by))
+
     # ---- not-yet-in-service ships are kept but marked 'planned' (never counted as active)
     con.execute("""UPDATE ship SET status='planned', status_basis=coalesce(status_basis,'date/name')
                    WHERE (name LIKE 'TB_%' AND length(name)<=6)
