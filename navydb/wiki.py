@@ -2,19 +2,19 @@
 import hashlib, json, pathlib, time
 import requests
 
-API = "https://en.wikipedia.org/w/api.php"
+API = "https://{lang}.wikipedia.org/w/api.php"
 CACHE = pathlib.Path(__file__).resolve().parent.parent / "data" / "raw"
 UA = {"User-Agent": "navy_database/0.1 (personal research project)"}
 
 
-def _get(params):
-    key = hashlib.sha1(json.dumps(params, sort_keys=True).encode()).hexdigest()
+def _get(params, lang="en"):
+    key = hashlib.sha1(json.dumps([params, lang] if lang != "en" else params, sort_keys=True).encode()).hexdigest()
     f = CACHE / f"{key}.json"
     if f.exists():
         return json.loads(f.read_text())
     for i in range(8):
         try:
-            r = requests.get(API, params={**params, "format": "json", "formatversion": 2},
+            r = requests.get(API.format(lang=lang), params={**params, "format": "json", "formatversion": 2},
                              headers=UA, timeout=30)
             if r.status_code == 429 or not r.headers.get("content-type", "").startswith("application/json"):
                 time.sleep(min(float(r.headers.get("Retry-After", 0) or 0) or 15 * (i + 1), 120))
@@ -28,10 +28,10 @@ def _get(params):
     raise RuntimeError(f"failed: {params}")
 
 
-def wikitext(title):
+def wikitext(title, lang="en"):
     """Return (wikitext, revid) following redirects."""
     d = _get({"action": "query", "prop": "revisions", "rvprop": "content|ids",
-              "rvslots": "main", "titles": title, "redirects": 1})
+              "rvslots": "main", "titles": title, "redirects": 1}, lang)
     p = d["query"]["pages"][0]
     if p.get("missing"):
         return None, None
@@ -39,10 +39,10 @@ def wikitext(title):
     return rev["slots"]["main"]["content"], rev["revid"]
 
 
-def html(title):
+def html(title, lang="en"):
     """Rendered page HTML (templates expanded) and revid."""
     d = _get({"action": "parse", "page": title, "prop": "text|revid", "redirects": 1,
-              "disablelimitreport": 1, "disableeditsection": 1})
+              "disablelimitreport": 1, "disableeditsection": 1}, lang)
     return d["parse"]["text"], d["parse"]["revid"]
 
 

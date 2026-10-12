@@ -2,11 +2,11 @@
 import re
 from bs4 import BeautifulSoup
 
-NAME_H = re.compile(r"^(name|ship|vessel|boat|hull|unit)", re.I)
-PEND_H = re.compile(r"pennant|hull|hull no|number|^no\.?$|^id$|identification|^p\.? ?no|designation", re.I)
-DATE_H = re.compile(r"commission|in service|service entry|entered service|entry into service|enter service|"
+NAME_H = re.compile(r"^(name|ship|vessel|boat|hull|unit|舰名|艦名|名称|名稱)", re.I)
+PEND_H = re.compile(r"舷号|舷號|pennant|hull|hull no|number|^no\.?$|^id$|identification|^p\.? ?no|designation", re.I)
+DATE_H = re.compile(r"服役|服役时间|入役|入列|commission|in service|service entry|entered service|entry into service|enter service|"
                     r"^service$|^date$|^accepted|^delivered|^completed", re.I)
-SKIP_H = re.compile(r"laid down|launched|builder|shipyard|decommission|fate|retired", re.I)
+SKIP_H = re.compile(r"开工|下水|退役|除役|laid down|launched|builder|shipyard|decommission|fate|retired", re.I)
 DATE_RE = re.compile(r"(\d{1,2}\s+\w+\s+(?:19|20)\d\d|\w+\s+\d{1,2},\s+(?:19|20)\d\d|\w+\s+(?:19|20)\d\d|(?:19|20)\d\d(?:-\d\d(?:-\d\d)?)?)")
 
 
@@ -17,10 +17,10 @@ def _text(c):
     return re.sub(r"\s*\[\s*[\w ]{1,6}\s*\]", "", t).strip()
 
 
-STATUS_H = re.compile(r"^status|^fate|^current status", re.I)
+STATUS_H = re.compile(r"^status|^fate|^current status|现状|現狀|状态|狀態", re.I)
 DECOM_H = re.compile(r"decommission|retired|withdrawn|stricken", re.I)
-ACTIVE_RE = re.compile(r"\b(active|in service|in commission|commissioned|operational|serving|undergoing|refit|reserve fleet in)\b", re.I)
-INACTIVE_RE = re.compile(r"decommission|retired|scrapp|sunk|museum|preserved|stricken|transferred|sold|broken up|"
+ACTIVE_RE = re.compile(r"现役|現役|服役中|\b(active|in service|in commission|commissioned|operational|serving|undergoing|refit|reserve fleet in)\b", re.I)
+INACTIVE_RE = re.compile(r"退役|除役|沉没|沉沒|报废|報廢|出售|转让|轉讓|decommission|retired|scrapp|sunk|museum|preserved|stricken|transferred|sold|broken up|"
                          r"cancel|lost|disposed|withdrawn|hulk|paid off|memorial|expended|target", re.I)
 
 
@@ -39,6 +39,10 @@ def classify(status_txt, decom_txt):
 def _iso(raw):
     from datetime import datetime
     raw = raw.replace("\xa0", " ").strip()
+    zm = re.search(r"((?:19|20)\d\d)\s*年\s*(?:(\d{1,2})\s*月)?\s*(?:(\d{1,2})\s*日)?", raw)
+    if zm:
+        y, m, d = zm.group(1), zm.group(2), zm.group(3)
+        return f"{y}-{int(m):02d}-{int(d):02d}" if m and d else (f"{y}-{int(m):02d}" if m else y)
     m = DATE_RE.search(raw)
     if not m:
         return None
@@ -79,14 +83,15 @@ def _grid(table):
     return grid
 
 
-def tables(html):
+def tables(html, any_class=False):
     """Yield (section_heading, [row dicts]) for wikitables that have a commissioning-date column."""
     soup = BeautifulSoup(html, "lxml")
     head = ""
     for el in soup.find_all(["h2", "h3", "h4", "table"]):
         if el.name != "table":
             head = el.get_text(" ", strip=True); continue
-        if "wikitable" not in (el.get("class") or []):
+        cls = " ".join(el.get("class") or [])
+        if "wikitable" not in cls and not (any_class and not re.search(r"navbox|infobox|ambox|metadata|vcard", cls)):
             continue
         grid = _grid(el)
         hi = next((i for i, r in enumerate(grid[:4]) if sum(1 for _, th in r if th) >= 3), None)
@@ -95,9 +100,12 @@ def tables(html):
         hdr = [t for t, _ in grid[hi]]
         di = next((i for i, h in enumerate(hdr) if DATE_H.search(h) and not SKIP_H.search(h)), None)
         ni = next((i for i, h in enumerate(hdr) if NAME_H.search(h)), None)
+        pi0 = next((i for i, h in enumerate(hdr) if re.search(r"舷号|舷號", h)), None)
+        if ni is None and pi0 is not None:
+            ni = pi0        # e.g. PLAN submarines: only hull numbers, no names
         if di is None or ni is None:
             continue
-        pi = next((i for i, h in enumerate(hdr) if re.search(r"pennant|hull|^p\.? ?no|identification|designation", h, re.I) and i != ni), None)
+        pi = next((i for i, h in enumerate(hdr) if re.search(r"舷号|舷號|pennant|hull|^p\.? ?no|identification|designation", h, re.I) and i != ni), None)
         if pi is None:
             pi = next((i for i, h in enumerate(hdr) if PEND_H.search(h) and i != ni), None)
         ci = next((i for i, h in enumerate(hdr) if re.match(r"^class", h, re.I) and i != ni), None)
