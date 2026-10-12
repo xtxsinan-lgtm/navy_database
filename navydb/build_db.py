@@ -14,7 +14,9 @@ ALL_NATIONS = (r"vietnam|algeria|indonesia|egypt|iran|libya|syria|ukrain|poland|
                r"myanmar|philippines|malaysia|thailand|brazil|chile|greece|greek|israel|saudi|venezuela|peru|argentin|mexic|nigeria|angola|"
                r"cuba|north korea|taiwan|vietnam|singapore|australia|canada|german|italy|italian|spain|spanish|norway|sweden|denmark|"
                r"portugal|romania|estonia|lithuania|finland|qatar|oman|uae|emirates|kuwait|morocco|tunisia|cameroon|ghana|kenya|"
-               r"sri lanka|nepal|new zealand|colombia|ecuador|uruguay|croatia|slovenia|georgia|azerbaijan|kazakhstan|turkmen|iraq|jordan|yemen")
+               r"sri lanka|nepal|new zealand|colombia|ecuador|uruguay|croatia|slovenia|georgia|azerbaijan|kazakhstan|turkmen|iraq|jordan|yemen|"
+               r"finland|united states|u\.s\.|\busa\b|united kingdom|japan|china|russia|india\b|korea|turkey|france|ireland|thai|ghana|"
+               r"estonia|lithuania|albania|mexico|south africa|saudi|bahrain|libya|lebanon|oman|brunei|taiwan")
 SUPPLEMENT = {
     "IN": ["List of destroyers of India", "List of frigates of India", "List of ships of the Indian Navy"],
     "TR": ["List of patrol vessels of the Turkish Navy", "List of submarines of the Turkish Navy",
@@ -105,19 +107,21 @@ def main():
         if re.search(ALL_NATIONS, ctx, re.I) and not re.search(own, ctx, re.I):
             continue
         hint = HINTS.get(r["class_page"])
-        if hint:
+        if hint and any(n.lower() in (r["name"] or "").lower() for n in hint.get("drop", [])):
+            continue
+        if hint and "rest" in hint:
             nm_ = re.sub(r"^[A-Za-z]+\s+", "", r["name"] or "")
-            owner = next((cc for cc, names in hint.items() if cc not in ("rest",) and any(n.lower() in (r["name"] or "").lower() or n.lower() == nm_.lower() for n in names)), hint["rest"])
+            owner = next((cc for cc, names in hint.items() if cc not in ("rest", "drop") and any(n.lower() in (r["name"] or "").lower() or n.lower() == nm_.lower() for n in names)), hint["rest"])
             if owner != r["country"]:
                 continue
         ctx_own = bool(re.search(COUNTRY_WORDS[r["country"]], ctx, re.I))
         pm = re.match(r"([A-Za-z]+)\s", r["name"] or "")
         pc = SHIP_PREFIX.get(pm.group(1)) if pm else None
-        if pc and pc != r["country"] and r["class_page"] in shared_any:
+        if pc and pc != r["country"]:
             continue                                      # ship belongs to another navy on a shared page
         if pc == r["country"]:
             pass
-        elif hint:
+        elif hint and "rest" in hint:
             pass
         elif len(pagecount[r["class_page"]]) > 1 and not ctx_own \
                 and not re.search(COUNTRY_WORDS[r["country"]], r.get("class_raw") or "", re.I):

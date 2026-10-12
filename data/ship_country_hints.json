@@ -1,6 +1,41 @@
 {
  "_comment": "Shared Wikipedia class pages whose ship tables carry no operator column. Names are matched to the table rows; every other row of the page goes to the 'rest' country.",
- "Anzac-class frigate": {"NZ": ["Te Kaha", "Te Mana"], "rest": "AU"},
- "Type 212A submarine": {"IT": ["Salvatore Todaro", "Scirè", "Pietro Venuti", "Romeo Romei"], "rest": "DE"},
- "Horizon-class frigate": {"IT": ["Andrea Doria", "Caio Duilio"], "rest": "FR"}
+ "Anzac-class frigate": {
+  "NZ": [
+   "Te Kaha",
+   "Te Mana"
+  ],
+  "rest": "AU"
+ },
+ "Type 212A submarine": {
+  "IT": [
+   "Salvatore Todaro",
+   "Scirè",
+   "Pietro Venuti",
+   "Romeo Romei"
+  ],
+  "rest": "DE"
+ },
+ "Horizon-class frigate": {
+  "IT": [
+   "Andrea Doria",
+   "Caio Duilio"
+  ],
+  "rest": "FR"
+ },
+ "FREMM multipurpose frigate": {
+  "drop": [
+   "Al-Galala",
+   "Bernees",
+   "Tahya Misr",
+   "Sphinx"
+  ]
+ },
+ "Lerici-class minehunter": {
+  "drop": [
+   "Katanpää",
+   "Purunpää",
+   "Vahterpää"
+  ]
+ }
 }
