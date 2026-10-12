@@ -69,7 +69,7 @@ add("FR", "mcm", "Tripartite-class minehunter")
 # --- South Korea
 add("KR", "destroyer", "Sejong the Great-class destroyer", "Chungmugong Yi Sun-sin-class destroyer", "Gwanggaeto the Great-class destroyer")
 add("KR", "frigate", "Incheon-class frigate", "Daegu-class frigate", "Ulsan-class frigate", "Chungnam-class frigate")
-add("KR", "corvette", "Pohang-class corvette", "Yoon Youngha-class patrol vessel", "Gumdoksuri-class patrol vessel")
+add("KR", "corvette", "Pohang-class corvette", "Gumdoksuri-class patrol vessel")
 add("KR", "submarine", "Chang Bogo-class submarine", "Son Won-il-class submarine", "Dosan Ahn Changho-class submarine")
 add("KR", "amphibious", "Dokdo-class amphibious assault ship", "Cheon Wang Bong-class LST")
 add("KR", "mcm", "Yangyang-class minesweeper", "Ganggyeong-class minehunter")

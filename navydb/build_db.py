@@ -30,8 +30,14 @@ def main():
     classes = json.load(open(ROOT / "data" / "classes_raw.json"))
     rows = json.load(open(ROOT / "data" / "ships_raw.json"))
     pagecount = {}
+    revgroup = {}
     for c in classes:
         pagecount.setdefault(c["page"], set()).add(c["country"])
+        revgroup.setdefault((c["country"], c["revid"]), []).append(c["page"])
+    shared_rev = {pg for pages in revgroup.values() if len(pages) > 1 for pg in pages}
+
+    def stem(page):
+        return re.sub(r"[-\s]class.*$", "", page, flags=re.I).strip().lower()
     path = ROOT / "data" / "navy.db"
     if path.exists():
         path.unlink()
@@ -75,14 +81,17 @@ def main():
         if len(pagecount[r["class_page"]]) > 1 and not re.search(COUNTRY_WORDS[r["country"]], r["section"], re.I) \
                 and not re.search(COUNTRY_WORDS[r["country"]], r.get("class_raw") or "", re.I):
             continue
+        if r["class_page"] in shared_rev:
+            if stem(r["class_page"]) not in (r.get("class_raw") or "").lower():
+                continue
         key = (k, r["name"], r["pennant"])
         if key in seen:
             continue
         seen.add(key)
-        con.execute("INSERT INTO ship(class_id,country,name,pennant,commissioned,commissioned_raw,status,source_page,source_rev) "
-                    "VALUES (?,?,?,?,?,?,?,?,?)",
+        con.execute("INSERT INTO ship(class_id,country,name,pennant,commissioned,commissioned_raw,status,status_basis,source_page,source_rev) "
+                    "VALUES (?,?,?,?,?,?,?,?,?,?)",
                     (k, r["country"], r["name"], r["pennant"], r["commissioned"], r["commissioned_raw"],
-                     r["status"], r["source_page"], r["source_rev"]))
+                     r["status"], "table" if r["status"] != "unknown" else None, r["source_page"], r["source_rev"]))
 
     # ---- US: the active-ships list is authoritative for who is commissioned today
     h, rev = wiki.html(LIST_PAGES["US"][0])
@@ -99,9 +108,34 @@ def main():
             k = us[page]
             con.execute("DELETE FROM ship WHERE class_id=? AND source_page!=?", (k, LIST_PAGES["US"][0]))
             n_us += 1
-            con.execute("INSERT INTO ship(class_id,country,name,pennant,commissioned,commissioned_raw,status,source_page,source_rev) "
-                        "VALUES (?,?,?,?,?,?,?,?,?)", (k, "US", re.sub(r"^USS\s+", "", r["name"]), r["pennant"], r["commissioned"],
-                                                        r["commissioned_raw"], "active", LIST_PAGES["US"][0], rev))
+            con.execute("INSERT INTO ship(class_id,country,name,pennant,commissioned,commissioned_raw,status,status_basis,source_page,source_rev) "
+                        "VALUES (?,?,?,?,?,?,?,?,?,?)", (k, "US", re.sub(r"^USS\s+", "", r["name"]), r["pennant"], r["commissioned"],
+                                                        r["commissioned_raw"], "active", "us-list", LIST_PAGES["US"][0], rev))
+    # ---- confirm 'unknown' rows that appear on the country's own active-ships list (name or pennant)
+    def norm(x):
+        return re.sub(r"[^a-z0-9]", "", re.sub(r"^(uss|hms|jds|js|tcg|ins|rokS|roks|fs|ran|plan)\s+", "", (x or "").lower().strip()))
+    for cc, pages in LIST_PAGES.items():
+        if cc == "US":
+            continue
+        names = set()
+        for pg in pages:
+            hh, _ = wiki.html(pg)
+            for head, trs in shipmod.tables(hh):
+                for r in trs:
+                    names.add(norm(r["name"].split("/")[-1])); names.add(norm(r["pennant"]))
+        names.discard("")
+        for sid, nm, pn in con.execute("select id,name,pennant from ship where country=? and status='unknown'", (cc,)).fetchall():
+            if norm(nm.split("/")[-1]) in names or (pn and norm(pn) in names):
+                con.execute("update ship set status='active', status_basis='country-list' where id=?", (sid,))
+
+    # ---- infer status for unknown rows when the class count says they must all be active
+    for k, ac, sh in con.execute("select id, active_count, note like '%shared%' from ship_class").fetchall():
+        if ac is None or sh or k in {v for (_, _), v in []}:
+            continue
+        act = con.execute("select count(*) from ship where class_id=? and status='active'", (k,)).fetchone()[0]
+        unk = con.execute("select count(*) from ship where class_id=? and status='unknown'", (k,)).fetchone()[0]
+        if unk and act + unk <= ac:
+            con.execute("update ship set status='active', status_basis='inferred' where class_id=? and status='unknown'", (k,))
     con.commit()
     for t in ("ship_class", "radar", "vls", "weapon", "ship"):
         print(t, con.execute(f"select count(*) from {t}").fetchone()[0])

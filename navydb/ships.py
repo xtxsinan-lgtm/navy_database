@@ -52,6 +52,33 @@ def _iso(raw):
     return None
 
 
+def _grid(table):
+    """Expand rowspan/colspan into a rectangular grid of (text, is_th) per row."""
+    grid, spans = [], {}
+    for tr in table.find_all("tr"):
+        row, col = [], 0
+        cells = tr.find_all(["td", "th"], recursive=False)
+        it = iter(cells)
+        while True:
+            while col in spans and spans[col][1] > 0:
+                row.append(spans[col][0]); spans[col][1] -= 1; col += 1
+            c = next(it, None)
+            if c is None:
+                break
+            cell = (_text(c), c.name == "th")
+            rs = int(re.sub(r"\D", "", c.get("rowspan") or "1") or 1)
+            cs = int(re.sub(r"\D", "", c.get("colspan") or "1") or 1)
+            for _ in range(cs):
+                row.append(cell)
+                if rs > 1:
+                    spans[col] = [cell, rs - 1]
+                col += 1
+        while col in spans and spans[col][1] > 0:
+            row.append(spans[col][0]); spans[col][1] -= 1; col += 1
+        grid.append(row)
+    return grid
+
+
 def tables(html):
     """Yield (section_heading, [row dicts]) for wikitables that have a commissioning-date column."""
     soup = BeautifulSoup(html, "lxml")
@@ -61,14 +88,11 @@ def tables(html):
             head = el.get_text(" ", strip=True); continue
         if "wikitable" not in (el.get("class") or []):
             continue
-        rows = el.find_all("tr")
-        hdr = None
-        for r in rows[:3]:
-            ths = r.find_all("th")
-            if len(ths) >= 3:
-                hdr = [_text(t) for t in ths]; break
-        if not hdr:
+        grid = _grid(el)
+        hi = next((i for i, r in enumerate(grid[:4]) if sum(1 for _, th in r if th) >= 3), None)
+        if hi is None:
             continue
+        hdr = [t for t, _ in grid[hi]]
         di = next((i for i, h in enumerate(hdr) if DATE_H.search(h) and not SKIP_H.search(h)), None)
         ni = next((i for i, h in enumerate(hdr) if NAME_H.search(h)), None)
         if di is None or ni is None:
@@ -78,11 +102,10 @@ def tables(html):
         si = next((i for i, h in enumerate(hdr) if STATUS_H.search(h)), None)
         xi = next((i for i, h in enumerate(hdr) if DECOM_H.search(h)), None)
         out = []
-        for r in rows:
-            cells = r.find_all(["td", "th"])
-            if len(cells) != len(hdr) or r.find_all("th") and len(r.find_all("th")) == len(cells):
+        for r in grid[hi + 1:]:
+            if len(r) != len(hdr) or all(th for _, th in r) or len({t for t, _ in r}) == 1:
                 continue
-            t = [_text(c) for c in cells]
+            t = [x for x, _ in r]
             if not t[ni]:
                 continue
             out.append({"name": t[ni], "pennant": t[pi] if pi is not None else None,
