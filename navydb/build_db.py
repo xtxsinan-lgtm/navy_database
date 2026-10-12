@@ -12,6 +12,11 @@ ALL_NATIONS = (r"vietnam|algeria|indonesia|egypt|iran|libya|syria|ukrain|poland|
                r"cuba|north korea|taiwan|vietnam|singapore|australia|canada|german|italy|italian|spain|spanish|norway|sweden|denmark|"
                r"portugal|romania|estonia|lithuania|finland|qatar|oman|uae|emirates|kuwait|morocco|tunisia|cameroon|ghana|kenya|"
                r"sri lanka|nepal|new zealand|colombia|ecuador|uruguay|croatia|slovenia|georgia|azerbaijan|kazakhstan|turkmen|iraq|jordan|yemen")
+SUPPLEMENT = {
+    "IN": ["List of destroyers of India", "List of frigates of India", "List of ships of the Indian Navy"],
+    "TR": ["List of patrol vessels of the Turkish Navy", "List of submarines of the Turkish Navy",
+           "List of amphibious warfare vessels of the Turkish Navy"],
+}
 NAVY = {"US": "United States Navy", "CN": "PLA Navy", "RU": "Russian Navy", "JP": "JMSDF", "GB": "Royal Navy",
         "FR": "French Navy", "KR": "ROK Navy", "IN": "Indian Navy", "TR": "Turkish Naval Forces"}
 
@@ -168,6 +173,72 @@ def main():
                     con.execute("INSERT INTO ship(class_id,country,name,pennant,commissioned,commissioned_raw,status,status_basis,source_page,source_rev) "
                                 "VALUES (?,?,?,?,?,?,?,?,?,?)", (k, cc, r["name"], r["pennant"], com, r["commissioned_raw"][:80],
                                                                  "active", "country-list", pg, rv))
+
+
+    # ---- supplementary per-class lists: add ships the class page lacked (match by class heading, dedupe by name/pennant)
+    def sup_norm(x):
+        return ascii_(re.sub(r"\(.*?\)|^(?:INS|TCG|HMIS|JS|JDS|ROKS|FS|USS|HMS)\s+", "", x or "", flags=re.I))
+
+
+    PEN = re.compile(r"^[A-Z]{1,4}[- ]?\d{1,4}$")
+
+    def reconcile(k, r):
+        """True if the list row r is already present (matched by name or pennant); fixes name/pennant columns that were swapped."""
+        rp = ascii_(r["pennant"]) if r["pennant"] else None
+        for sid, nm, pn in con.execute("select id,name,pennant from ship where class_id=?", (k,)).fetchall():
+            if sup_norm(nm) == sup_norm(r["name"]):
+                return True
+            if rp and (ascii_(pn or "") == rp or (PEN.match((nm or "").strip()) and ascii_(nm) == rp)):
+                if PEN.match((nm or "").strip()):
+                    con.execute("UPDATE ship SET name=?, pennant=? WHERE id=?", (re.sub(r"^(?:JS|JDS|INS|TCG)\s+", "", r["name"]), r["pennant"], sid))
+                return True
+        return False
+
+    stems = {}
+    for c in classes:
+        stems.setdefault(c["country"], {})[c["page"]] = ascii_(re.sub(r"[-\s]class.*$|\s*\(\d{4}\)$", "", c["page"], flags=re.I))
+    added = 0
+    for cc, pages in SUPPLEMENT.items():
+        for pg in pages:
+            hh, rv = wiki.html(pg)
+            for head, trs in shipmod.tables(hh):
+                hs = ascii_(re.sub(r"[-\s]*class.*$", "", head, flags=re.I))
+                page = next((p for p, st in stems[cc].items() if len(st) >= 3 and hs == st), None)
+                if not page:
+                    continue
+                k = cid[(cc, page)]
+                for r in trs:
+                    if r["status"] == "inactive" or reconcile(k, r):
+                        continue
+                    nm = re.sub(r"\s*\(.*?\)", "", re.sub(r"^(?:INS|TCG)\s+", "", r["name"])).strip()
+                    con.execute("INSERT INTO ship(class_id,country,name,pennant,commissioned,commissioned_raw,status,status_raw,status_basis,source_page,source_rev) "
+                                "VALUES (?,?,?,?,?,?,?,?,?,?,?)", (k, cc, nm, r["pennant"] or (re.search(r"\(([A-Z]-?\d+)\)", r["name"]) or [None, None])[1],
+                                                                   r["commissioned"], r["commissioned_raw"][:80], r["status"], r.get("status_raw"),
+                                                                   "supplement" if r["status"] != "unknown" else None, pg, rv))
+                    added += 1
+    print("supplement rows added:", added)
+
+    # ---- JP / RU: complete classes from the country's active list (class column), add only missing ships
+    for cc in ("JP", "RU"):
+        for pg in LIST_PAGES[cc]:
+            hh, rv = wiki.html(pg)
+            for head, trs in shipmod.tables(hh):
+                if re.search(r"auxil|support|train|tug|survey|research|replen|logistic|misc|service craft|intelligence|icebreak|landing craft", head, re.I):
+                    continue
+                for r in trs:
+                    cl = ascii_(re.sub(r"[-\s]?class|Project \d+", "", r.get("class_raw") or "", flags=re.I))
+                    page = next((p for p, st in stems[cc].items() if st and cl.startswith(st)), None)
+                    if not page:
+                        continue
+                    k = cid[(cc, page)]
+                    if reconcile(k, r):
+                        continue
+                    com = r["commissioned"] if r["commissioned"] and int(r["commissioned"][:4]) >= 1940 else None
+                    con.execute("INSERT INTO ship(class_id,country,name,pennant,commissioned,commissioned_raw,status,status_basis,source_page,source_rev) "
+                                "VALUES (?,?,?,?,?,?,?,?,?,?)", (k, cc, re.sub(r"^(?:JS|JDS)\s+", "", r["name"]), r["pennant"], com,
+                                                                 r["commissioned_raw"][:80], "active", "country-list", pg, rv))
+                    added += 1
+    print("total supplement/complete rows added:", added)
 
     # ---- not-yet-in-service ships are kept but marked 'planned' (never counted as active)
     con.execute("""UPDATE ship SET status='planned', status_basis=coalesce(status_basis,'date/name')
