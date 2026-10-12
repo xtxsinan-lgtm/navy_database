@@ -94,7 +94,10 @@ def tables(html, any_class=False):
         if "wikitable" not in cls and not (any_class and not re.search(r"navbox|infobox|ambox|metadata|vcard", cls)):
             continue
         grid = _grid(el)
-        hi = next((i for i, r in enumerate(grid[:4]) if sum(1 for _, th in r if th) >= 3), None)
+        def _looks_header(r):
+            return sum(1 for t, _ in r if t and (NAME_H.search(t) or DATE_H.search(t) or PEND_H.search(t) or STATUS_H.search(t) or t == "序号")) >= 3
+
+        hi = next((i for i, r in enumerate(grid[:4]) if sum(1 for _, th in r if th) >= 3 or _looks_header(r)), None)
         if hi is None:
             continue
         hdr = [t for t, _ in grid[hi]]

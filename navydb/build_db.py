@@ -268,6 +268,54 @@ def main():
             added += 1
     print("total supplement/complete rows added:", added)
 
+
+    # ---- China: per-ship rows from zh.wikipedia (hull numbers, names, commissioning dates, status)
+    zpath = ROOT / "data" / "ships_zh.json"
+    if zpath.exists():
+        def zh_status(raw):
+            t = (raw or "").strip()
+            if not t:
+                return "unknown"
+            if re.search(r"海警|转隶|轉隶|移交|转让|轉讓|出口|退役|除役|沉没|沉沒|拆解|报废", t) and not re.match(r"现役|現役|在役", t):
+                return "inactive"
+            if re.search(r"试验|试航|海试|建造|下水|舾装|在建|预定|计划", t) and not re.match(r"现役|現役|在役", t):
+                return "planned"
+            if re.match(r"现役|現役|在役|服役", t):
+                return "active"
+            return "unknown"
+
+        zadded = zupd = 0
+        for r in json.load(open(zpath)):
+            k = cid.get(("CN", r["class_page"]))
+            if not k:
+                continue
+            pen = r["pennant"] if r["pennant"] and re.fullmatch(r"[0-9]{2,3}[A-Z]?", r["pennant"].strip()) else None
+            nm = re.sub(r"(?:号|號|舰|艦|艇)$", "", r["name"].strip())
+            if not pen and re.fullmatch(r"[0-9]{2,3}", nm):
+                pen = nm
+            if r["class_page"] == "Kilo-class submarine" and not (pen and re.fullmatch(r"\d{3}", pen) and 364 <= int(pen) <= 375):
+                continue                                 # the zh Kilo page lists every operator; keep PLAN boats only
+            if not nm:
+                continue
+            st = zh_status(r.get("status_raw"))
+            hit = next((sid for sid, p in con.execute("select id,pennant from ship where class_id=?", (k,)).fetchall()
+                        if p and pen and ascii_(p) == ascii_(pen)), None)
+            if hit is None and pen:
+                # existing rows whose 'name' holds the hull number or Chinese name
+                hit = next((sid for sid, n in con.execute("select id,name from ship where class_id=?", (k,)).fetchall()
+                            if ascii_(n) == ascii_(pen) or (nm and nm in n)), None)
+            if hit is not None:
+                con.execute("UPDATE ship SET pennant=coalesce(pennant,?), commissioned=coalesce(commissioned,?), commissioned_raw=coalesce(commissioned_raw,?), "
+                            "status=CASE WHEN status='unknown' THEN ? ELSE status END, status_raw=coalesce(status_raw,?) WHERE id=?",
+                            (pen, r["commissioned"], r["commissioned_raw"][:80], st, r.get("status_raw"), hit))
+                zupd += 1
+                continue
+            con.execute("INSERT INTO ship(class_id,country,name,pennant,commissioned,commissioned_raw,status,status_raw,status_basis,source_page,source_rev) "
+                        "VALUES (?,?,?,?,?,?,?,?,?,?,?)", (k, "CN", nm if not pen or nm != pen else pen, pen, r["commissioned"], r["commissioned_raw"][:80], st,
+                                                           r.get("status_raw"), "zh-wiki" if st != "unknown" else None, "zh:" + r["zh_page"], r["rev"]))
+            zadded += 1
+        print("zh rows added:", zadded, "enriched:", zupd)
+
     # ---- not-yet-in-service ships are kept but marked 'planned' (never counted as active)
     con.execute("""UPDATE ship SET status='planned', status_basis=coalesce(status_basis,'date/name')
                    WHERE (name LIKE 'TB_%' AND length(name)<=6)

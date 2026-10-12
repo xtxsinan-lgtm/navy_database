@@ -1,7 +1,9 @@
 {
  "Chinese aircraft carrier Fujian": {
-  "src": "infobox displacement empty; no manual figure added",
-  "svc": 2025
+  "disp": 80000,
+  "basis": "full",
+  "svc": 2025,
+  "src": "zh.wikipedia infobox: 满载 80,000+ 吨 (en infobox empty)"
  },
  "Chinese aircraft carrier Liaoning": {
   "svc": 2012,
