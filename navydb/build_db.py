@@ -171,11 +171,12 @@ def main():
 
     # ---- not-yet-in-service ships are kept but marked 'planned' (never counted as active)
     con.execute("""UPDATE ship SET status='planned', status_basis=coalesce(status_basis,'date/name')
-                   WHERE name LIKE 'TB_%' AND length(name)<=6
+                   WHERE (name LIKE 'TB_%' AND length(name)<=6)
                       OR substr(commissioned,1,7) > '2026-10'
-                      OR lower(coalesce(status_raw,'')) GLOB '*planned*' OR lower(coalesce(status_raw,'')) GLOB '*under construction*'
-                      OR lower(coalesce(status_raw,'')) GLOB '*building*' OR lower(coalesce(status_raw,'')) GLOB '*on order*'
-                      OR lower(coalesce(status_raw,'')) GLOB '*fitting out*' OR lower(coalesce(status_raw,'')) GLOB '*sea trials*'""")
+                      OR (commissioned IS NULL AND status!='inactive' AND (
+                            lower(coalesce(status_raw,'')) GLOB '*planned*' OR lower(coalesce(status_raw,'')) GLOB '*under construction*'
+                         OR lower(coalesce(status_raw,'')) GLOB '*building*' OR lower(coalesce(status_raw,'')) GLOB '*on order*'
+                         OR lower(coalesce(status_raw,'')) GLOB '*fitting out*' OR lower(coalesce(status_raw,'')) GLOB '*sea trials*'))""")
     # ---- drop exact duplicates (same class, name, commissioned date)
     con.execute("""DELETE FROM ship WHERE id NOT IN (SELECT min(id) FROM ship GROUP BY class_id, lower(name), coalesce(commissioned,''), coalesce(pennant,''))""")
 
