@@ -168,3 +168,15 @@ add("BE", "frigate", "Karel Doorman-class frigate")
 add("BE", "mcm", "Tripartite-class minehunter")
 add("HR", "corvette", "Kralj-class missile boat")
 add("ME", "frigate", "Kotor-class frigate")
+
+# ===================== Taiwan (ROC) and the Philippines =====================
+add("TW", "destroyer", "Kidd-class destroyer")                       # ROCN Keelung class; page is shared with the former US/Iran users
+add("TW", "frigate", "Cheng Kung-class frigate", "Kang Ding-class frigate")
+add("TW", "corvette", "Tuo Chiang-class corvette", "Kuang Hua VI-class missile boat")
+add("TW", "submarine", "Hai Lung-class submarine", "Hai Kun-class submarine")
+add("TW", "amphibious", "Yushan-class landing platform dock")
+add("TW", "mcm", "Yung Feng-class minehunter")
+add("PH", "frigate", "Jose Rizal-class frigate", "Miguel Malvar-class frigate", "Del Pilar-class offshore patrol vessel")
+add("PH", "amphibious", "Tarlac-class landing platform dock")
+add("PH", "corvette", "Pohang-class corvette")                      # shared with South Korea: Conrado Yap, Sultan Kudarat, ...
+add("PH", "patrol", "Jacinto-class patrol vessel", "Acero-class gunboat")

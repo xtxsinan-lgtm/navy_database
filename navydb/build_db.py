@@ -4,7 +4,7 @@ from . import db, wiki, ships as shipmod, classparse as cp
 from .countries import LIST_PAGES
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-COUNTRY_WORDS = {"CA": r"canad", "AU": r"austral", "NZ": r"new zealand|zealand", "DE": r"german", "IT": r"ital", "ES": r"spain|spanish",
+COUNTRY_WORDS = {"TW": r"taiwan|republic of china|\broc\b|rocn", "PH": r"philippin", "CA": r"canad", "AU": r"austral", "NZ": r"new zealand|zealand", "DE": r"german", "IT": r"ital", "ES": r"spain|spanish",
                  "NL": r"netherlands|dutch", "NO": r"norw", "DK": r"denmark|danish", "SE": r"swed", "FI": r"finland|finnish", "PL": r"poland|polish",
                  "GR": r"greece|greek|hellenic", "PT": r"portug", "RO": r"romania", "BG": r"bulgaria", "BE": r"belgi", "HR": r"croatia", "ME": r"montenegr",
                  "CN": r"china|chinese|plan\b|people.s liberation", "RU": r"russia|soviet|russian",
@@ -20,7 +20,7 @@ SUPPLEMENT = {
     "TR": ["List of patrol vessels of the Turkish Navy", "List of submarines of the Turkish Navy",
            "List of amphibious warfare vessels of the Turkish Navy"],
 }
-NAVY = {"CA": "Royal Canadian Navy", "AU": "Royal Australian Navy", "NZ": "Royal New Zealand Navy", "DE": "German Navy", "IT": "Italian Navy",
+NAVY = {"TW": "ROC Navy (Taiwan)", "PH": "Philippine Navy", "CA": "Royal Canadian Navy", "AU": "Royal Australian Navy", "NZ": "Royal New Zealand Navy", "DE": "German Navy", "IT": "Italian Navy",
         "ES": "Spanish Navy", "NL": "Royal Netherlands Navy", "NO": "Royal Norwegian Navy", "DK": "Royal Danish Navy", "SE": "Swedish Navy",
         "FI": "Finnish Navy", "PL": "Polish Navy", "GR": "Hellenic Navy", "PT": "Portuguese Navy", "RO": "Romanian Naval Forces",
         "BG": "Bulgarian Navy", "BE": "Belgian Navy", "HR": "Croatian Navy", "ME": "Montenegrin Navy",
@@ -384,6 +384,8 @@ def main():
         unk = con.execute("select count(*) from ship where class_id=? and status='unknown'", (k,)).fetchone()[0]
         if unk and act + unk <= ac:
             con.execute("update ship set status='active', status_basis='inferred' where class_id=? and status='unknown'", (k,))
+    from . import estimate
+    estimate.run(con)
     con.commit()
     for t in ("ship_class", "radar", "vls", "weapon", "ship"):
         print(t, con.execute(f"select count(*) from {t}").fetchone()[0])

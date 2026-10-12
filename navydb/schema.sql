@@ -42,6 +42,10 @@ CREATE TABLE IF NOT EXISTS ship (
   pennant TEXT,                   -- hull / pennant number
   commissioned TEXT,              -- ISO date or partial (YYYY-MM / YYYY)
   commissioned_raw TEXT,
+  service_year INTEGER,           -- commissioning year: the real one, or an estimate (see service_year_estimated)
+  service_year_estimated INTEGER, -- 0 = taken from a source, 1 = ESTIMATED by estimate.py
+  service_year_est_basis TEXT,    -- how the estimate was made
+  service_year_est_confidence TEXT, -- high | medium | low
   status TEXT,                    -- active / inactive / unknown
   status_raw TEXT,                -- original wording from the source
   status_basis TEXT,              -- table | us-list | inferred (class count matches)
