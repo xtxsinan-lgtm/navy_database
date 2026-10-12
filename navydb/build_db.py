@@ -7,6 +7,11 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 COUNTRY_WORDS = {"CN": r"china|chinese|plan\b|people.s liberation", "RU": r"russia|soviet|russian",
                  "IN": r"india|indian", "TR": r"turk", "KR": r"korea", "JP": r"japan",
                  "GB": r"british|united kingdom|royal navy", "FR": r"france|french", "US": r"united states|u\.?s\.? navy"}
+ALL_NATIONS = (r"vietnam|algeria|indonesia|egypt|iran|libya|syria|ukrain|poland|polish|bulgaria|belgi|netherlands|dutch|latvia|pakistan|bangladesh|"
+               r"myanmar|philippines|malaysia|thailand|brazil|chile|greece|greek|israel|saudi|venezuela|peru|argentin|mexic|nigeria|angola|"
+               r"cuba|north korea|taiwan|vietnam|singapore|australia|canada|german|italy|italian|spain|spanish|norway|sweden|denmark|"
+               r"portugal|romania|estonia|lithuania|finland|qatar|oman|uae|emirates|kuwait|morocco|tunisia|cameroon|ghana|kenya|"
+               r"sri lanka|nepal|new zealand|colombia|ecuador|uruguay|croatia|slovenia|georgia|azerbaijan|kazakhstan|turkmen|iraq|jordan|yemen")
 NAVY = {"US": "United States Navy", "CN": "PLA Navy", "RU": "Russian Navy", "JP": "JMSDF", "GB": "Royal Navy",
         "FR": "French Navy", "KR": "ROK Navy", "IN": "Indian Navy", "TR": "Turkish Naval Forces"}
 
@@ -77,6 +82,10 @@ def main():
     for r in rows:
         k = cid.get((r["country"], r["class_page"]))
         if not k:
+            continue
+        ctx = f'{r.get("sub", "")} {r["section"]}'
+        own = COUNTRY_WORDS[r["country"]]
+        if re.search(ALL_NATIONS, ctx, re.I) and not re.search(own, ctx, re.I):
             continue
         if len(pagecount[r["class_page"]]) > 1 and not re.search(COUNTRY_WORDS[r["country"]], r["section"], re.I) \
                 and not re.search(COUNTRY_WORDS[r["country"]], r.get("class_raw") or "", re.I):
@@ -159,6 +168,16 @@ def main():
                     con.execute("INSERT INTO ship(class_id,country,name,pennant,commissioned,commissioned_raw,status,status_basis,source_page,source_rev) "
                                 "VALUES (?,?,?,?,?,?,?,?,?,?)", (k, cc, r["name"], r["pennant"], com, r["commissioned_raw"][:80],
                                                                  "active", "country-list", pg, rv))
+
+    # ---- not-yet-in-service ships are kept but marked 'planned' (never counted as active)
+    con.execute("""UPDATE ship SET status='planned', status_basis=coalesce(status_basis,'date/name')
+                   WHERE name LIKE 'TB_%' AND length(name)<=6
+                      OR substr(commissioned,1,7) > '2026-10'
+                      OR lower(coalesce(status_raw,'')) GLOB '*planned*' OR lower(coalesce(status_raw,'')) GLOB '*under construction*'
+                      OR lower(coalesce(status_raw,'')) GLOB '*building*' OR lower(coalesce(status_raw,'')) GLOB '*on order*'
+                      OR lower(coalesce(status_raw,'')) GLOB '*fitting out*' OR lower(coalesce(status_raw,'')) GLOB '*sea trials*'""")
+    # ---- drop exact duplicates (same class, name, commissioned date)
+    con.execute("""DELETE FROM ship WHERE id NOT IN (SELECT min(id) FROM ship GROUP BY class_id, lower(name), coalesce(commissioned,''), coalesce(pennant,''))""")
 
     # ---- manual corrections reviewed against the page text (data/overrides/<CC>.json)
     for f in sorted((ROOT / "data" / "overrides").glob("*.json")):
