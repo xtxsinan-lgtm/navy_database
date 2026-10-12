@@ -90,3 +90,81 @@ add("TR", "patrol", "Rüzgar-class fast attack craft", "Kılıç-class fast atta
     "Yıldız-class fast attack craft", "Tuzla-class patrol boat")
 add("TR", "amphibious", "Bayraktar-class tank landing ship")
 add("TR", "mcm", "A-class minehunter")
+
+# ===================== NATO members (other than US/GB/FR/TR) and Five Eyes (CA/AU/NZ) =====================
+# Smallest navies (EE, LV, LT, AL, SI, HR, ME, BG) are only partly covered: their fleets are mostly patrol craft and
+# second-hand minehunters whose Wikipedia pages are shared with the former operators.
+# --- Canada
+add("CA", "frigate", "Halifax-class frigate")
+add("CA", "submarine", "Upholder/Victoria-class submarine")
+add("CA", "patrol", "Kingston-class coastal defence vessel", "Harry DeWolf-class offshore patrol vessel", "Orca-class patrol vessel")
+# --- Australia
+add("AU", "destroyer", "Hobart-class destroyer")
+add("AU", "frigate", "Anzac-class frigate")
+add("AU", "submarine", "Collins-class submarine")
+add("AU", "amphibious", "Canberra-class landing helicopter dock")
+add("AU", "patrol", "Arafura-class patrol vessel", "Armidale-class patrol boat")
+add("AU", "mcm", "Huon-class minehunter")
+# --- New Zealand
+add("NZ", "frigate", "Anzac-class frigate")
+add("NZ", "patrol", "Protector-class patrol vessel", "Lake-class inshore patrol vessel")
+# --- Germany
+add("DE", "frigate", "Baden-Württemberg-class frigate", "Brandenburg-class frigate", "Sachsen-class frigate", "Bremen-class frigate")
+add("DE", "corvette", "Braunschweig-class corvette")
+add("DE", "submarine", "Type 212A submarine")
+add("DE", "mcm", "Frankenthal-class minehunter")
+# --- Italy
+add("IT", "carrier", "Italian aircraft carrier Cavour", "Italian aircraft carrier Giuseppe Garibaldi")
+add("IT", "destroyer", "Horizon-class frigate", "Durand de la Penne-class destroyer")
+add("IT", "frigate", "Bergamini-class frigate", "Maestrale-class frigate")
+add("IT", "submarine", "Sauro-class submarine", "Type 212A submarine")
+add("IT", "amphibious", "San Giorgio-class amphibious transport dock")
+add("IT", "patrol", "Comandanti-class patrol vessel", "Cassiopea-class patrol vessel")
+add("IT", "mcm", "Lerici-class minehunter")
+# --- Spain
+add("ES", "carrier", "Spanish ship Juan Carlos I")
+add("ES", "frigate", "Álvaro de Bazán-class frigate", "Santa María-class frigate")
+add("ES", "amphibious", "Galicia-class landing platform dock")
+add("ES", "submarine", "S-80 Plus-class submarine")
+add("ES", "patrol", "Meteoro-class patrol vessel")
+# --- Netherlands
+add("NL", "frigate", "De Zeven Provinciën-class frigate")
+add("NL", "patrol", "Holland-class patrol vessel")
+add("NL", "submarine", "Walrus-class submarine")
+add("NL", "amphibious", "Rotterdam-class landing platform dock")
+add("NL", "mcm", "Alkmaar-class minehunter")
+# --- Norway
+add("NO", "frigate", "Fridtjof Nansen-class frigate")
+add("NO", "submarine", "Ula-class submarine")
+add("NO", "corvette", "Skjold-class corvette")
+add("NO", "mcm", "Sauda-class mine countermeasures vessel")
+# --- Denmark
+add("DK", "frigate", "Iver Huitfeldt-class frigate", "Absalon-class frigate", "Thetis-class frigate")
+add("DK", "patrol", "Knud Rasmussen-class patrol vessel")
+# --- Sweden
+add("SE", "corvette", "Visby-class corvette")
+add("SE", "submarine", "Gotland-class submarine", "Södermanland-class submarine")
+add("SE", "mcm", "Koster-class mine countermeasures vessel", "Landsort-class mine countermeasures vessel")
+# --- Finland
+add("FI", "corvette", "Hamina-class missile boat", "Pohjanmaa-class corvette")
+add("FI", "mcm", "Katanpää-class mine countermeasure vessel")
+# --- Poland
+add("PL", "frigate", "Oliver Hazard Perry-class frigate")
+add("PL", "corvette", "Orkan-class fast attack craft")
+add("PL", "submarine", "Kobben-class submarine")
+add("PL", "mcm", "Kormoran 2-class minehunter")
+# --- Greece
+add("GR", "frigate", "Elli-class frigate", "Hydra-class frigate", "Kimon-class frigate")
+add("GR", "corvette", "Roussen-class fast attack craft")
+add("GR", "submarine", "Type 214 submarine", "Type 209 submarine")
+# --- Portugal
+add("PT", "frigate", "Vasco da Gama-class frigate", "Karel Doorman-class frigate")
+add("PT", "submarine", "Tridente-class submarine")
+add("PT", "patrol", "Viana do Castelo-class patrol vessel")
+# --- Romania / Bulgaria / Belgium / Croatia / Montenegro
+add("RO", "frigate", "Romanian frigate Regele Ferdinand", "Romanian frigate Regina Maria (F222)")
+add("BG", "frigate", "Wielingen-class frigate")
+add("BE", "frigate", "Karel Doorman-class frigate")
+add("BE", "mcm", "Tripartite-class minehunter")
+add("HR", "corvette", "Kralj-class missile boat")
+add("ME", "frigate", "Kotor-class frigate")

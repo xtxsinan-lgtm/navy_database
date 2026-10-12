@@ -4,7 +4,10 @@ from . import db, wiki, ships as shipmod, classparse as cp
 from .countries import LIST_PAGES
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-COUNTRY_WORDS = {"CN": r"china|chinese|plan\b|people.s liberation", "RU": r"russia|soviet|russian",
+COUNTRY_WORDS = {"CA": r"canad", "AU": r"austral", "NZ": r"new zealand|zealand", "DE": r"german", "IT": r"ital", "ES": r"spain|spanish",
+                 "NL": r"netherlands|dutch", "NO": r"norw", "DK": r"denmark|danish", "SE": r"swed", "FI": r"finland|finnish", "PL": r"poland|polish",
+                 "GR": r"greece|greek|hellenic", "PT": r"portug", "RO": r"romania", "BG": r"bulgaria", "BE": r"belgi", "HR": r"croatia", "ME": r"montenegr",
+                 "CN": r"china|chinese|plan\b|people.s liberation", "RU": r"russia|soviet|russian",
                  "IN": r"india|indian", "TR": r"turk", "KR": r"korea", "JP": r"japan",
                  "GB": r"british|united kingdom|royal navy", "FR": r"france|french", "US": r"united states|u\.?s\.? navy"}
 ALL_NATIONS = (r"vietnam|algeria|indonesia|egypt|iran|libya|syria|ukrain|poland|polish|bulgaria|belgi|netherlands|dutch|latvia|pakistan|bangladesh|"
@@ -17,7 +20,11 @@ SUPPLEMENT = {
     "TR": ["List of patrol vessels of the Turkish Navy", "List of submarines of the Turkish Navy",
            "List of amphibious warfare vessels of the Turkish Navy"],
 }
-NAVY = {"US": "United States Navy", "CN": "PLA Navy", "RU": "Russian Navy", "JP": "JMSDF", "GB": "Royal Navy",
+NAVY = {"CA": "Royal Canadian Navy", "AU": "Royal Australian Navy", "NZ": "Royal New Zealand Navy", "DE": "German Navy", "IT": "Italian Navy",
+        "ES": "Spanish Navy", "NL": "Royal Netherlands Navy", "NO": "Royal Norwegian Navy", "DK": "Royal Danish Navy", "SE": "Swedish Navy",
+        "FI": "Finnish Navy", "PL": "Polish Navy", "GR": "Hellenic Navy", "PT": "Portuguese Navy", "RO": "Romanian Naval Forces",
+        "BG": "Bulgarian Navy", "BE": "Belgian Navy", "HR": "Croatian Navy", "ME": "Montenegrin Navy",
+        "US": "United States Navy", "CN": "PLA Navy", "RU": "Russian Navy", "JP": "JMSDF", "GB": "Royal Navy",
         "FR": "French Navy", "KR": "ROK Navy", "IN": "Indian Navy", "TR": "Turkish Naval Forces"}
 
 
