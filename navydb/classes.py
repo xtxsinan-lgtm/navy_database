@@ -116,10 +116,10 @@ add("DE", "mcm", "Frankenthal-class minehunter")
 # --- Italy
 add("IT", "carrier", "Italian aircraft carrier Cavour", "Italian aircraft carrier Giuseppe Garibaldi")
 add("IT", "destroyer", "Horizon-class frigate", "Durand de la Penne-class destroyer")
-add("IT", "frigate", "Bergamini-class frigate", "Maestrale-class frigate")
+add("IT", "frigate", "FREMM multipurpose frigate", "Maestrale-class frigate")
 add("IT", "submarine", "Sauro-class submarine", "Type 212A submarine")
 add("IT", "amphibious", "San Giorgio-class amphibious transport dock")
-add("IT", "patrol", "Comandanti-class patrol vessel", "Cassiopea-class patrol vessel")
+add("IT", "patrol", "Thaon di Revel-class patrol vessel", "Comandanti-class patrol vessel", "Cassiopea-class patrol vessel")
 add("IT", "mcm", "Lerici-class minehunter")
 # --- Spain
 add("ES", "carrier", "Spanish ship Juan Carlos I")
