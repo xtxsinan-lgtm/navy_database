@@ -6,11 +6,24 @@ INFOBOX = re.compile(r"infobox (ship|military unit)", re.I)
 
 
 def infobox(text):
-    code = mw.parse(text)
-    for t in code.filter_templates(recursive=False):
-        if str(t.name).strip().lower().startswith("infobox ship"):
-            return {str(p.name).strip().lower(): str(p.value).strip() for p in t.params}
-    return {}
+    """Merge all sibling 'Infobox ship *' templates (begin/career/characteristics/...).
+
+    Repeated keys (e.g. several sub-class characteristics blocks) are kept as key, key__2, ...
+    """
+    out = {}
+    for t in mw.parse(text).filter_templates(recursive=True):
+        name = str(t.name).strip().lower()
+        if not name.startswith("infobox ship"):
+            continue
+        for p in t.params:
+            k = str(p.name).strip().lower()
+            if not k or k.startswith("section") or not str(p.value).strip():
+                continue
+            n, kk = 1, k
+            while kk in out:
+                n += 1; kk = f"{k}__{n}"
+            out[kk] = str(p.value).strip()
+    return out
 
 
 def clean(s):
