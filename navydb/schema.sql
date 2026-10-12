@@ -32,3 +32,17 @@ CREATE TABLE IF NOT EXISTS weapon (
   category TEXT,                  -- gun/missile/torpedo/ciws/aircraft/other
   raw TEXT
 );
+
+CREATE TABLE IF NOT EXISTS ship (
+  id INTEGER PRIMARY KEY,
+  class_id INTEGER REFERENCES ship_class(id),
+  country TEXT NOT NULL,
+  name TEXT NOT NULL,
+  pennant TEXT,                   -- hull / pennant number
+  commissioned TEXT,              -- ISO date or partial (YYYY-MM / YYYY)
+  commissioned_raw TEXT,
+  status TEXT,                    -- active / reserve / refit / unknown
+  source_page TEXT,               -- wikipedia page the row came from
+  source_rev INTEGER
+);
+CREATE INDEX IF NOT EXISTS ship_class_idx ON ship(class_id);
