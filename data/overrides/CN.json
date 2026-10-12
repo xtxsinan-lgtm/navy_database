@@ -1,0 +1,247 @@
+{
+ "Chinese aircraft carrier Fujian": {
+  "src": "infobox displacement empty; no manual figure added",
+  "svc": 2025
+ },
+ "Chinese aircraft carrier Liaoning": {
+  "svc": 2012,
+  "src": "infobox",
+  "vls": [],
+  "weapons": [
+   {
+    "name": "Type 1130 CIWS",
+    "qty": 3,
+    "category": "ciws"
+   },
+   {
+    "name": "HHQ-10 18-cell missile launcher",
+    "qty": 3,
+    "category": "ciws"
+   }
+  ]
+ },
+ "Chinese aircraft carrier Shandong": {
+  "svc": 2019,
+  "src": "infobox",
+  "vls": [],
+  "weapons": [
+   {
+    "name": "Type 1130 CIWS",
+    "qty": 3,
+    "category": "ciws"
+   },
+   {
+    "name": "HHQ-10 18-cell missile launcher",
+    "qty": 3,
+    "category": "ciws"
+   }
+  ]
+ },
+ "Type 055 destroyer": {
+  "svc": 2020,
+  "src": "infobox",
+  "vls": [
+   {
+    "model": "GJB 5860-2006",
+    "cells": 112,
+    "raw": "112 universal VLS cells"
+   }
+  ],
+  "weapons": [
+   {
+    "name": "H/PJ-45 130 mm gun",
+    "qty": 1,
+    "category": "gun"
+   },
+   {
+    "name": "Type 730 CIWS 30 mm",
+    "qty": 1,
+    "category": "ciws"
+   },
+   {
+    "name": "Type 1130 (H/PJ-11) CIWS",
+    "qty": 1,
+    "category": "ciws"
+   },
+   {
+    "name": "HHQ-10 24-cell CIWS",
+    "qty": 1,
+    "category": "ciws"
+   },
+   {
+    "name": "HHQ-9 / HHQ-9B (VLS)",
+    "qty": null,
+    "category": "missile"
+   },
+   {
+    "name": "HHQ-16 / HHQ-16B (VLS)",
+    "qty": null,
+    "category": "missile"
+   },
+   {
+    "name": "YJ-18A anti-ship (VLS)",
+    "qty": null,
+    "category": "missile"
+   },
+   {
+    "name": "YJ-20 / YJ-21 anti-ship ballistic (VLS)",
+    "qty": null,
+    "category": "missile"
+   },
+   {
+    "name": "CJ-10 land-attack (VLS)",
+    "qty": null,
+    "category": "missile"
+   },
+   {
+    "name": "324 mm torpedo tubes (Yu-7)",
+    "qty": 2,
+    "category": "torpedo"
+   }
+  ]
+ },
+ "Type 052D destroyer": {
+  "svc": 2014,
+  "src": "infobox",
+  "vls": [
+   {
+    "model": "GJB 5860-2006",
+    "cells": 64,
+    "raw": "64 universal VLS cells"
+   }
+  ],
+  "weapons": [
+   {
+    "name": "H/PJ-45 130 mm gun",
+    "qty": 1,
+    "category": "gun"
+   },
+   {
+    "name": "HHQ-10 24-cell CIWS",
+    "qty": 1,
+    "category": "ciws"
+   },
+   {
+    "name": "Type 730 CIWS",
+    "qty": 1,
+    "category": "ciws"
+   },
+   {
+    "name": "Type 1130 CIWS",
+    "qty": null,
+    "category": "ciws"
+   },
+   {
+    "name": "HHQ-9 / HHQ-9B (VLS)",
+    "qty": null,
+    "category": "missile"
+   },
+   {
+    "name": "YJ-18 anti-ship (VLS)",
+    "qty": null,
+    "category": "missile"
+   },
+   {
+    "name": "YJ-20 anti-ship ballistic (VLS)",
+    "qty": null,
+    "category": "missile"
+   },
+   {
+    "name": "CJ-10 land-attack (VLS)",
+    "qty": null,
+    "category": "missile"
+   },
+   {
+    "name": "CY-5 ASW missile (VLS)",
+    "qty": null,
+    "category": "missile"
+   },
+   {
+    "name": "torpedo tube sets (ASW)",
+    "qty": 2,
+    "category": "torpedo"
+   }
+  ]
+ },
+ "Type 052C destroyer": {
+  "svc": 2005,
+  "src": "infobox (48 HHQ-9 in revolver-style VLS)",
+  "vls": [
+   {
+    "model": "HHQ-9 VLS",
+    "cells": 48,
+    "raw": "48 HHQ-9 cells"
+   }
+  ]
+ },
+ "Type 051C destroyer": {
+  "svc": 2006,
+  "src": "infobox (S-300FM 6×8 revolver VLS)",
+  "vls": [
+   {
+    "model": "S-300FM revolver VLS",
+    "cells": 48,
+    "raw": "6 × 8 cells"
+   }
+  ]
+ },
+ "Chinese destroyer Shenzhen": {
+  "svc": 1999,
+  "src": "infobox; post-2016 fit",
+  "vls": [
+   {
+    "model": "VLS",
+    "cells": 32,
+    "raw": "32-cell VLS (HHQ-16)"
+   }
+  ]
+ },
+ "Sovremenny-class destroyer": {
+  "src": "infobox; page shared RU/CN, values per country below"
+ },
+ "Type 054A frigate": {
+  "svc": 2008,
+  "src": "infobox",
+  "vls": [
+   {
+    "model": "H/AKJ-16",
+    "cells": 32,
+    "raw": "1 × 32-cell"
+   }
+  ]
+ },
+ "Type 054B frigate": {
+  "src": "infobox (32 cells first two ships, 48 from third)",
+  "vls": [
+   {
+    "model": "H/AKJ-16",
+    "cells": 48,
+    "raw": "48 cells (32 on first two ships)"
+   }
+  ]
+ },
+ "Type 054 frigate": {
+  "svc": 2005,
+  "src": "infobox",
+  "vls": []
+ },
+ "Type 053H3 frigate": {
+  "src": "infobox",
+  "vls": []
+ },
+ "Type 056 corvette": {
+  "svc": 2013,
+  "src": "infobox",
+  "vls": []
+ },
+ "Type 093 submarine": {
+  "src": "infobox displacement empty; Type 093B has 24-cell VLS",
+  "vls": [
+   {
+    "model": "VLS",
+    "cells": 24,
+    "raw": "Type 093B 24-cell VLS"
+   }
+  ]
+ }
+}

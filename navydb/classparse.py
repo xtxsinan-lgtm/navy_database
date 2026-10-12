@@ -13,6 +13,8 @@ UNIT_T = {"t": 1.0, "mt": 1.0, "tonne": 1.0, "tonnes": 1.0, "lt": 1.016, "st": 0
 def plain(raw):
     """Wikitext -> readable text, keeping {{convert}} numbers and bullet line breaks."""
     s = REF.sub("", raw or "")
+    s = re.sub(r"\[\[(?:[^\]|\[]*\|)([^\]\[]*)\]\]", r"\1", s)
+    s = re.sub(r"\[\[([^\]\[|]*)\]\]", r"\1", s)
     s = CONV.sub(lambda m: f"{m.group(1)}{'-' + m.group(2) if m.group(2) else ''} {m.group(3)}", s)
     s = re.sub(r"<br\s*/?>", "\n", s, flags=re.I)
     s = re.sub(r"\{\{\s*(?:plainlist|ubl|unbulleted list|flatlist|hlist)\s*\|", "\n", s, flags=re.I)
@@ -54,7 +56,7 @@ def years(raw):
 
 def items(raw):
     out = [re.sub(r"^\s*-\s*", "", l).strip() for l in plain(raw).splitlines() if len(l.strip()) > 2]
-    return [i for i in out if not (len(i) < 70 and re.search(r":\s*-?\s*$", i))]
+    return [i for i in out if not (len(i) < 70 and re.search(r":\s*-?\s*$", i) and not re.search(r"\d|VLS|cell", i))]
 
 
 RADAR_WORDS = re.compile(r"radar|AESA|phased array|PESA|SPY-|SPG-|SPS-|Furke|Poliment|Fregat|MR-\d|3D|search|fire.control|FCS", re.I)
@@ -77,22 +79,31 @@ def radars(raw):
     return out
 
 
-VLS_MODEL = re.compile(r"(Mk\.?\s?41|Mk\.?\s?57|Mk\.?\s?48|Mk\.?\s?45 VLS|Sylver\s?[A-Z]?\d{2}|SYLVER\s?[A-Z]?\d{2}|UKSK|3S[- ]?14M?|3S[- ]?24|K-?VLS|KVLS|"
+VLS_MODEL = re.compile(r"(H/AKJ-16|Mk\.?\s?41|Mk\.?\s?57|Mk\.?\s?48|Mk\.?\s?45 VLS|Sylver\s?[A-Z]?\d{2}|SYLVER\s?[A-Z]?\d{2}|UKSK|3S[- ]?14M?|3S[- ]?24|K-?VLS|KVLS|"
                        r"Redut|Polyment|Poliment|H/AJK-16|GJB 5860-2006|VL MICA|VL-?MICA|VLS Mk\s?\d+|S-?VLS|MBDA|[A-Z]{2,}VLS)", re.I)
 CELLS = [re.compile(r"(\d+)\s*[×xX]\s*(\d+)[- ]?cell", re.I), re.compile(r"(\d+)[- ]?cells?", re.I), re.compile(r"(\d+)\s*[×xX]\s*(?:VLS|vertical)", re.I)]
+
+
+VLS_LINE = re.compile(r"\bVLS\b|PVLS|vertical(?:ly)? launch|vertically|UKSK|Sylver|SYLVER|Redut|\bVPM\b|3S[- ]?14|3S[- ]?24|K-?VLS|GJB 5860|H/AKJ-16|Mk\.? ?41|Mk\.? ?57|revolver|Polyment|Poliment|VL MICA|S-VLS", re.I)
+NOT_VLS = re.compile(r"\bCIWS\b|close.in|Rolling Airframe|\bRAM\b|Sea ?RAM|HQ-10|HHQ-10|HQ-7|FL-3000|launcher for .*MANPADS|decoy|chaff", re.I)
 
 
 def vls(raw):
     out = []
     for it in items(raw):
-        if not re.search(r"\bVLS\b|vertical launch|vertically|\bcells?\b|UKSK|Sylver|Redut", it, re.I):
+        if not VLS_LINE.search(it) or (NOT_VLS.search(it) and not re.search(r"\bVLS\b|vertical|Mk\.? ?41|Mk\.? ?57", it, re.I)):
             continue
         cells = None
-        m = CELLS[0].search(it)
-        if m:
+        it_n = re.sub(r"GJB\s*5860-2006|\b(?:Mk|Type)\s?\.?\s?\d+\b|\bK-?VLS\b", lambda m: m.group().replace("-", "_").replace(" ", "_"), it)
+        tot = re.search(r"\(\s*(?:total\s+)?(\d+)\s*(?:total\s+|launch\s+)?cells?\s*(?:total)?\)", it_n, re.I)
+        m = CELLS[0].search(it_n)
+        if tot:
+            cells = int(tot.group(1))
+        elif m:
             cells = int(m.group(1)) * int(m.group(2))
         else:
-            m = CELLS[1].search(it) or CELLS[2].search(it)
+            m = (re.search(r"(\d+)\s*[×x]?\s*(?:[\w/.\-]+\s+){0,5}?(?:VLS\s+)?cells?", it_n, re.I) or CELLS[1].search(it_n)
+                 or CELLS[2].search(it_n) or re.search(r"(\d+)\s*[×x]?\s*(?:vertical|VLS)", it_n, re.I))
             if m:
                 cells = int(m.group(1))
         mm = VLS_MODEL.search(it)
