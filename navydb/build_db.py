@@ -208,7 +208,7 @@ def main():
                     continue
                 k = cid[(cc, page)]
                 for r in trs:
-                    if r["status"] == "inactive" or reconcile(k, r):
+                    if r["status"] == "inactive" or re.match(r"never|cancel|not commission", r["commissioned_raw"], re.I) or reconcile(k, r):
                         continue
                     nm = re.sub(r"\s*\(.*?\)", "", re.sub(r"^(?:INS|TCG)\s+", "", r["name"])).strip()
                     con.execute("INSERT INTO ship(class_id,country,name,pennant,commissioned,commissioned_raw,status,status_raw,status_basis,source_page,source_rev) "
@@ -238,6 +238,34 @@ def main():
                                 "VALUES (?,?,?,?,?,?,?,?,?,?)", (k, cc, re.sub(r"^(?:JS|JDS)\s+", "", r["name"]), r["pennant"], com,
                                                                  r["commissioned_raw"][:80], "active", "country-list", pg, rv))
                     added += 1
+
+    # ---- targeted single-ship pages (data/ships_extra_targeted.json): read from each ship's own infobox
+    tpath = ROOT / "data" / "ships_extra_targeted.json"
+    if tpath.exists():
+        for r in json.load(open(tpath)):
+            k = cid.get((r["country"], r["class_page"]))
+            if not k:
+                continue
+            pen = (re.findall(r"[A-Z]{1,3}[- ]?\d{1,4}", r.get("pennant") or "") or [None])[-1]
+            if r["class_page"].startswith("Son Won-il") and not (pen and 72 <= int(re.sub(r"\D", "", pen)) <= 82):
+                continue            # the page's link list also contains the Dosan Ahn Changho class
+            row = {"name": re.sub(r"\s*\(\d{4}\)$", "", re.sub(r"^ROKS\s+", "", r["name"])), "pennant": pen,
+                   "commissioned": r["commissioned"], "commissioned_raw": r["commissioned_raw"],
+                   "status": shipmod.classify(r.get("status_raw") or "", ""), "status_raw": r.get("status_raw")}
+            if re.match(r"never|cancel|not commission", r["commissioned_raw"], re.I):
+                continue
+            row["name"] = re.sub(r"^(?:INS|TCG|HMS)\s+", "", row["name"])
+            hit = next((sid for sid, nm, cm in con.execute("select id,name,commissioned from ship where class_id=?", (k,)).fetchall()
+                        if sup_norm(nm) == sup_norm(row["name"]) or (pen and ascii_(pen) == ascii_(nm))), None)
+            if hit is not None:      # a list row without a date: enrich it from the ship's own page
+                con.execute("UPDATE ship SET name=?, pennant=?, commissioned=?, commissioned_raw=?, status=?, status_raw=?, status_basis='ship-page', "
+                            "source_page=?, source_rev=? WHERE id=?", (row["name"], pen, row["commissioned"], row["commissioned_raw"][:80], row["status"],
+                                                                       row["status_raw"], r["page"], r["rev"], hit))
+                continue
+            con.execute("INSERT INTO ship(class_id,country,name,pennant,commissioned,commissioned_raw,status,status_raw,status_basis,source_page,source_rev) "
+                        "VALUES (?,?,?,?,?,?,?,?,?,?,?)", (k, r["country"], row["name"], pen, row["commissioned"], row["commissioned_raw"][:80],
+                                                           row["status"], row["status_raw"], "ship-page", r["page"], r["rev"]))
+            added += 1
     print("total supplement/complete rows added:", added)
 
     # ---- not-yet-in-service ships are kept but marked 'planned' (never counted as active)
