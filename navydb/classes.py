@@ -40,7 +40,7 @@ add("RU", "corvette", "Steregushchiy-class corvette", "Buyan-class corvette", "K
 add("RU", "submarine", "Borei-class submarine", "Delta IV-class submarine", "Yasen-class submarine", "Akula-class submarine",
     "Oscar-class submarine", "Sierra-class submarine", "Victor-class submarine", "Kilo-class submarine", "Lada-class submarine")
 add("RU", "amphibious", "Ivan Gren-class landing ship", "Ropucha-class landing ship", "Alligator-class landing ship")
-add("RU", "mcm", "Alexandrit-class minehunter", "Natya-class minesweeper", "Gorya-class minesweeper")
+add("RU", "mcm", "Alexandrit-class minesweeper", "Natya-class minesweeper", "Gorya-class minesweeper")
 # --- Japan
 add("JP", "carrier", "Izumo-class destroyer", "Hyūga-class helicopter destroyer")
 add("JP", "destroyer", "Kongō-class destroyer", "Atago-class destroyer", "Maya-class destroyer", "Asahi-class destroyer",
@@ -56,7 +56,7 @@ add("GB", "destroyer", "Type 45 destroyer")
 add("GB", "frigate", "Type 23 frigate")
 add("GB", "submarine", "Vanguard-class submarine", "Astute-class submarine")
 add("GB", "amphibious", "Albion-class landing platform dock")
-add("GB", "patrol", "River-class offshore patrol vessel (2003)")
+add("GB", "patrol", "River-class patrol vessel")
 add("GB", "mcm", "Hunt-class mine countermeasures vessel", "Sandown-class minehunter")
 # --- France
 add("FR", "carrier", "French aircraft carrier Charles de Gaulle")
@@ -85,8 +85,8 @@ add("IN", "amphibious", "Magar-class amphibious warfare vessel", "Shardul-class 
 add("TR", "carrier", "TCG Anadolu")
 add("TR", "frigate", "Yavuz-class frigate", "Barbaros-class frigate", "G-class frigate", "Oliver Hazard Perry-class frigate", "Istanbul-class frigate")
 add("TR", "corvette", "Ada-class corvette", "Hisar-class offshore patrol vessel", "Burak-class corvette")
-add("TR", "submarine", "Preveze-class submarine", "Atılay-class submarine", "Gür-class submarine", "Reis-class submarine")
+add("TR", "submarine", "Preveze-class submarine", "Atılay-class submarine (1974)", "Gür-class submarine", "Reis-class submarine")
 add("TR", "patrol", "Rüzgar-class fast attack craft", "Kılıç-class fast attack craft", "Doğan-class fast attack craft",
     "Yıldız-class fast attack craft", "Tuzla-class patrol boat")
 add("TR", "amphibious", "Bayraktar-class tank landing ship")
-add("TR", "mcm", "Engin-class minehunter")
+add("TR", "mcm", "A-class minehunter")

@@ -44,3 +44,9 @@ def html(title):
     d = _get({"action": "parse", "page": title, "prop": "text|revid", "redirects": 1,
               "disablelimitreport": 1, "disableeditsection": 1})
     return d["parse"]["text"], d["parse"]["revid"]
+
+
+def expand(text):
+    """Expand templates in a snippet (for infobox fields that are bare template transclusions)."""
+    d = _get({"action": "expandtemplates", "text": text, "prop": "wikitext"})
+    return d["expandtemplates"]["wikitext"]

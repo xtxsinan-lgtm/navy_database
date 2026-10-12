@@ -74,6 +74,7 @@ def tables(html):
         if di is None or ni is None:
             continue
         pi = next((i for i, h in enumerate(hdr) if PEND_H.search(h) and i != ni), None)
+        ci = next((i for i, h in enumerate(hdr) if re.match(r"^class", h, re.I) and i != ni), None)
         si = next((i for i, h in enumerate(hdr) if STATUS_H.search(h)), None)
         xi = next((i for i, h in enumerate(hdr) if DECOM_H.search(h)), None)
         out = []
@@ -86,6 +87,7 @@ def tables(html):
                 continue
             out.append({"name": t[ni], "pennant": t[pi] if pi is not None else None,
                         "commissioned_raw": t[di], "commissioned": _iso(t[di]),
+                        "class_raw": t[ci] if ci is not None else None,
                         "status_raw": t[si] if si is not None else None,
                         "decommissioned_raw": t[xi] if xi is not None else None,
                         "status": classify(t[si] if si is not None else "", t[xi] if xi is not None else "")})

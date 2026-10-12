@@ -8,6 +8,7 @@ CREATE TABLE IF NOT EXISTS ship_class (
   revid INTEGER,                  -- page revision id at fetch time
   displacement_full_t REAL,       -- full load, tonnes (submarines: submerged)
   displacement_raw TEXT,
+  displacement_basis TEXT,        -- full | submerged | standard | other
   service_start TEXT,             -- first in-service year(s)
   service_raw TEXT,
   active_count INTEGER,           -- from list page, may be null
