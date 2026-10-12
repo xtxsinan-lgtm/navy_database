@@ -88,10 +88,10 @@ def main():
         if key in seen:
             continue
         seen.add(key)
-        con.execute("INSERT INTO ship(class_id,country,name,pennant,commissioned,commissioned_raw,status,status_basis,source_page,source_rev) "
-                    "VALUES (?,?,?,?,?,?,?,?,?,?)",
+        con.execute("INSERT INTO ship(class_id,country,name,pennant,commissioned,commissioned_raw,status,status_raw,status_basis,source_page,source_rev) "
+                    "VALUES (?,?,?,?,?,?,?,?,?,?,?)",
                     (k, r["country"], r["name"], r["pennant"], r["commissioned"], r["commissioned_raw"],
-                     r["status"], "table" if r["status"] != "unknown" else None, r["source_page"], r["source_rev"]))
+                     r["status"], r.get("status_raw"), "table" if r["status"] != "unknown" else None, r["source_page"], r["source_rev"]))
 
     # ---- US: the active-ships list is authoritative for who is commissioned today
     h, rev = wiki.html(LIST_PAGES["US"][0])
@@ -111,6 +111,80 @@ def main():
             con.execute("INSERT INTO ship(class_id,country,name,pennant,commissioned,commissioned_raw,status,status_basis,source_page,source_rev) "
                         "VALUES (?,?,?,?,?,?,?,?,?,?)", (k, "US", re.sub(r"^USS\s+", "", r["name"]), r["pennant"], r["commissioned"],
                                                         r["commissioned_raw"], "active", "us-list", LIST_PAGES["US"][0], rev))
+    filled = set()
+
+    # ---- fill classes that still have no ships
+    def nostar(k):
+        return con.execute("select count(*) from ship where class_id=?", (k,)).fetchone()[0] == 0
+
+    def ascii_(x):
+        import unicodedata
+        return re.sub(r"[^a-z0-9]", "", unicodedata.normalize("NFKD", x or "").encode("ascii", "ignore").decode().lower())
+
+    # (a) single-ship pages: the ship's own infobox
+    for c in classes:
+        k = cid[(c["country"], c["page"])]
+        ib = c["infobox"]
+        if not nostar(k) or re.search(r"class|Type \d", c["page"]) or not (ib.get("commissioned") or ib.get("in_commission_range")):
+            continue
+        nm = re.sub(r"^(Chinese|Russian|French|Soviet)\s+(aircraft carrier|destroyer|frigate|submarine)\s+|^(INS|TCG|USS|HMS)\s+", "", c["page"])
+        stt = cp.plain(ib.get("status", "")) or None
+        low = (stt or "").lower()
+        status = "inactive" if re.search(r"decommission|retired|scrap|sunk|museum", low) else "active"
+        com = cp.plain(ib.get("commissioned") or "") or (str((cp.years(ib.get("in_commission_range")) or [""])[0]))
+        con.execute("INSERT INTO ship(class_id,country,name,pennant,commissioned,commissioned_raw,status,status_raw,status_basis,source_page,source_rev) "
+                    "VALUES (?,?,?,?,?,?,?,?,?,?,?)", (k, c["country"], nm, None, shipmod._iso(com), com[:80], status, stt, "table",
+                                                       c["page"], c["revid"]))
+
+    # (b) per-ship rows of the country's active list that carry a class column
+    for cc, pages in LIST_PAGES.items():
+        if cc == "US":
+            continue
+        mine = {c["page"]: ascii_(re.sub(r"[-\s]class.*$", "", c["page"], flags=re.I)) for c in classes if c["country"] == cc}
+        for pg in pages:
+            hh, rv = wiki.html(pg)
+            for head, trs in shipmod.tables(hh):
+                if re.search(r"auxil|support|train|tug|survey|research|replen|logistic|misc|service craft|intelligence|icebreak|landing craft", head, re.I):
+                    continue
+                for r in trs:
+                    cl = ascii_(re.sub(r"[-\s]?class", "", r.get("class_raw") or "", flags=re.I))
+                    page = next((p for p, st in mine.items() if st and cl.startswith(st)), None)
+                    if not page:
+                        continue
+                    k = cid[(cc, page)]
+                    if not nostar(k) and (k, "list") not in filled:
+                        continue
+                    filled.add((k, "list"))
+                    com = r["commissioned"] if r["commissioned"] and int(r["commissioned"][:4]) >= 1940 else None
+                    con.execute("INSERT INTO ship(class_id,country,name,pennant,commissioned,commissioned_raw,status,status_basis,source_page,source_rev) "
+                                "VALUES (?,?,?,?,?,?,?,?,?,?)", (k, cc, r["name"], r["pennant"], com, r["commissioned_raw"][:80],
+                                                                 "active", "country-list", pg, rv))
+
+    # ---- manual corrections reviewed against the page text (data/overrides/<CC>.json)
+    for f in sorted((ROOT / "data" / "overrides").glob("*.json")):
+        for page, o in json.load(open(f)).items():
+            k = cid.get((f.stem, page))
+            if not k:
+                print("override for unknown class", f.stem, page); continue
+            sets, args = [], []
+            for col, key in (("displacement_full_t", "disp"), ("displacement_basis", "basis"), ("service_start", "svc")):
+                if key in o:
+                    sets.append(f"{col}=?"); args.append(o[key] if key != "svc" else str(o[key]))
+            sets.append("note=coalesce(note||'; ','')||?"); args.append("manual review: " + o.get("src", ""))
+            con.execute(f"UPDATE ship_class SET {', '.join(sets)} WHERE id=?", (*args, k))
+            if "radars" in o:
+                con.execute("DELETE FROM radar WHERE class_id=?", (k,))
+                for r in o["radars"]:
+                    con.execute("INSERT INTO radar VALUES (?,?,?,?)", (k, r["model"], r.get("role"), "manual"))
+            if "vls" in o:
+                con.execute("DELETE FROM vls WHERE class_id=?", (k,))
+                for v in o["vls"]:
+                    con.execute("INSERT INTO vls VALUES (?,?,?,?)", (k, v["model"], v["cells"], v.get("raw", "manual")))
+            if "weapons" in o:
+                con.execute("DELETE FROM weapon WHERE class_id=?", (k,))
+                for x in o["weapons"]:
+                    con.execute("INSERT INTO weapon VALUES (?,?,?,?,?)", (k, x["name"], x["qty"], x["category"], "manual"))
+
     # ---- confirm 'unknown' rows that appear on the country's own active-ships list (name or pennant)
     def norm(x):
         return re.sub(r"[^a-z0-9]", "", re.sub(r"^(uss|hms|jds|js|tcg|ins|rokS|roks|fs|ran|plan)\s+", "", (x or "").lower().strip()))

@@ -1,0 +1,584 @@
+{
+ "Nimitz-class aircraft carrier": {
+  "disp": 101600,
+  "basis": "full",
+  "svc": 1975,
+  "src": "infobox (100,000+ long tons full load)",
+  "radars": [
+   {
+    "model": "AN/SPS-48E",
+    "role": "air-search"
+   },
+   {
+    "model": "AN/SPS-49(V)5",
+    "role": "air-search"
+   },
+   {
+    "model": "AN/SPQ-9B",
+    "role": "surface-search"
+   },
+   {
+    "model": "AN/SPN-46",
+    "role": "air-traffic"
+   },
+   {
+    "model": "AN/SPN-43C",
+    "role": "air-traffic"
+   },
+   {
+    "model": "AN/SPN-41",
+    "role": "landing-aid"
+   },
+   {
+    "model": "Mk 95",
+    "role": "fire-control"
+   }
+  ],
+  "weapons": [
+   {
+    "name": "Mk 29 launcher, 8 × RIM-162 ESSM / RIM-7 Sea Sparrow each (2–3 launchers)",
+    "qty": null,
+    "category": "missile"
+   },
+   {
+    "name": "Phalanx CIWS (3–4 mounts)",
+    "qty": null,
+    "category": "ciws"
+   },
+   {
+    "name": "Mk 49 launcher, 21 × RIM-116 RAM each",
+    "qty": 2,
+    "category": "ciws"
+   },
+   {
+    "name": "Mk 38 25 mm machine gun system",
+    "qty": null,
+    "category": "gun"
+   }
+  ]
+ },
+ "Gerald R. Ford-class aircraft carrier": {
+  "disp": 101600,
+  "basis": "full",
+  "svc": 2017,
+  "src": "infobox",
+  "radars": [
+   {
+    "model": "AN/SPY-3",
+    "role": "multifunction"
+   },
+   {
+    "model": "AN/SPY-4",
+    "role": "air-search"
+   },
+   {
+    "model": "AN/SPY-6(V)3 EASR",
+    "role": "air-search"
+   },
+   {
+    "model": "AN/SPQ-9B",
+    "role": "surface-search"
+   }
+  ],
+  "weapons": [
+   {
+    "name": "Mk 29 launcher, 8 × RIM-162 ESSM each",
+    "qty": 2,
+    "category": "missile"
+   },
+   {
+    "name": "Mk 49 launcher, 21 × RIM-116 RAM each",
+    "qty": 2,
+    "category": "ciws"
+   },
+   {
+    "name": "Phalanx CIWS",
+    "qty": 3,
+    "category": "ciws"
+   },
+   {
+    "name": "Mk 38 25 mm machine gun system",
+    "qty": 4,
+    "category": "gun"
+   },
+   {
+    "name": "M2 .50 cal machine gun",
+    "qty": 4,
+    "category": "gun"
+   }
+  ]
+ },
+ "Ticonderoga-class cruiser": {
+  "svc": 1983,
+  "src": "disp+radar from infobox; armament MANUAL (infobox armament is a broken template)",
+  "radars": [
+   {
+    "model": "AN/SPY-1A/B",
+    "role": "multifunction"
+   },
+   {
+    "model": "AN/SPS-49",
+    "role": "air-search"
+   },
+   {
+    "model": "AN/SPG-62",
+    "role": "fire-control"
+   },
+   {
+    "model": "AN/SPS-73",
+    "role": "surface-search"
+   },
+   {
+    "model": "AN/SPQ-9",
+    "role": "fire-control"
+   }
+  ],
+  "vls": [
+   {
+    "model": "Mk 41",
+    "cells": 122,
+    "raw": "2 × 61-cell (manual)"
+   }
+  ],
+  "weapons": [
+   {
+    "name": "Mk 45 5-inch/54 gun",
+    "qty": 2,
+    "category": "gun"
+   },
+   {
+    "name": "Phalanx CIWS",
+    "qty": 2,
+    "category": "ciws"
+   },
+   {
+    "name": "Mk 32 triple torpedo tubes",
+    "qty": 2,
+    "category": "torpedo"
+   },
+   {
+    "name": "Mk 141 Harpoon quad launcher (fitted on some)",
+    "qty": 2,
+    "category": "missile"
+   }
+  ]
+ },
+ "Arleigh Burke-class destroyer": {
+  "disp": 9855,
+  "basis": "full",
+  "svc": 1991,
+  "src": "infobox (Flight III 9,700 LT full load)",
+  "radars": [
+   {
+    "model": "AN/SPY-1D",
+    "role": "multifunction"
+   },
+   {
+    "model": "AN/SPY-6(V)1",
+    "role": "multifunction"
+   },
+   {
+    "model": "AN/SPS-67(V)3/5",
+    "role": "surface-search"
+   },
+   {
+    "model": "AN/SPQ-9B",
+    "role": "surface-search"
+   },
+   {
+    "model": "AN/SPS-73(V)12",
+    "role": "surface-search"
+   },
+   {
+    "model": "BridgeMaster E",
+    "role": "navigation"
+   },
+   {
+    "model": "AN/SPG-62",
+    "role": "fire-control"
+   }
+  ],
+  "vls": [
+   {
+    "model": "Mk 41",
+    "cells": 96,
+    "raw": "Flights IIA/III: 32+64"
+   },
+   {
+    "model": "Mk 41",
+    "cells": 90,
+    "raw": "Flights I/II: 29+61"
+   }
+  ],
+  "weapons": [
+   {
+    "name": "Mk 45 5-inch/54 Mod 1/2 gun (DDG-51–80)",
+    "qty": 1,
+    "category": "gun"
+   },
+   {
+    "name": "Mk 45 5-inch/62 Mod 4 gun (DDG-81+)",
+    "qty": 1,
+    "category": "gun"
+   },
+   {
+    "name": "Phalanx CIWS (DDG-51–84: 2; DDG-85+: 1)",
+    "qty": null,
+    "category": "ciws"
+   },
+   {
+    "name": "SeaRAM (8 ships, replaces rear CIWS)",
+    "qty": null,
+    "category": "ciws"
+   },
+   {
+    "name": "Mk 38 25 mm machine gun system",
+    "qty": 2,
+    "category": "gun"
+   },
+   {
+    "name": "M2 .50 cal machine gun",
+    "qty": 4,
+    "category": "gun"
+   },
+   {
+    "name": "Mk 141 Harpoon launcher (Flights I/II)",
+    "qty": 2,
+    "category": "missile"
+   },
+   {
+    "name": "Mk 32 triple torpedo tubes (manual)",
+    "qty": 2,
+    "category": "torpedo"
+   }
+  ]
+ },
+ "Zumwalt-class destroyer": {
+  "disp": 15906,
+  "basis": "full",
+  "svc": 2016,
+  "src": "infobox",
+  "radars": [
+   {
+    "model": "AN/SPY-3",
+    "role": "multifunction"
+   }
+  ],
+  "vls": [
+   {
+    "model": "Mk 57 PVLS",
+    "cells": 80,
+    "raw": "20 modules × 4 cells"
+   }
+  ],
+  "weapons": [
+   {
+    "name": "155 mm/62 Advanced Gun System (inoperable; CPS hypersonic missiles planned)",
+    "qty": 2,
+    "category": "gun"
+   },
+   {
+    "name": "Mk 46 Mod 2 30 mm gun",
+    "qty": 2,
+    "category": "gun"
+   }
+  ]
+ },
+ "Freedom-class littoral combat ship": {
+  "disp": 3500,
+  "basis": "full",
+  "svc": 2008,
+  "src": "infobox",
+  "radars": [
+   {
+    "model": "TRS-3D / TRS-4D",
+    "role": "air-search"
+   }
+  ],
+  "weapons": [
+   {
+    "name": "Mk 110 57 mm gun",
+    "qty": 1,
+    "category": "gun"
+   },
+   {
+    "name": "Mk 49 launcher, 21 × RIM-116 RAM",
+    "qty": 1,
+    "category": "ciws"
+   },
+   {
+    "name": "12.7 mm machine gun",
+    "qty": 4,
+    "category": "gun"
+   },
+   {
+    "name": "Mk 44 Bushmaster II 30 mm gun (SUW module)",
+    "qty": 2,
+    "category": "gun"
+   },
+   {
+    "name": "AGM-114L Hellfire (planned, SUW module)",
+    "qty": 24,
+    "category": "missile"
+   }
+  ]
+ },
+ "Independence-class littoral combat ship": {
+  "disp": 3104,
+  "basis": "full",
+  "svc": 2010,
+  "src": "infobox",
+  "radars": [
+   {
+    "model": "AN/SPS-77(V)1 Sea Giraffe",
+    "role": "air-search"
+   },
+   {
+    "model": "BridgeMaster E",
+    "role": "navigation"
+   }
+  ],
+  "weapons": [
+   {
+    "name": "Mk 110 57 mm gun",
+    "qty": 1,
+    "category": "gun"
+   },
+   {
+    "name": "SeaRAM CIWS",
+    "qty": 1,
+    "category": "ciws"
+   },
+   {
+    "name": ".50 cal machine gun",
+    "qty": 4,
+    "category": "gun"
+   },
+   {
+    "name": "Mk 44 Bushmaster II 30 mm gun (SUW module)",
+    "qty": 2,
+    "category": "gun"
+   },
+   {
+    "name": "RGM-184A Naval Strike Missile",
+    "qty": 8,
+    "category": "missile"
+   },
+   {
+    "name": "AGM-114L Hellfire (SUW module)",
+    "qty": 24,
+    "category": "missile"
+   }
+  ]
+ },
+ "Ohio-class submarine": {
+  "disp": 18750,
+  "basis": "submerged",
+  "svc": 1981,
+  "src": "infobox; Trident count MANUAL",
+  "radars": [
+   {
+    "model": "AN/BPS-15J",
+    "role": "navigation"
+   }
+  ],
+  "weapons": [
+   {
+    "name": "Mk 48 torpedo tubes (21 in)",
+    "qty": 4,
+    "category": "torpedo"
+   },
+   {
+    "name": "UGM-133 Trident II D5 SLBM (SSBN, 20 active tubes; manual)",
+    "qty": 20,
+    "category": "missile"
+   }
+  ]
+ },
+ "Los Angeles-class submarine": {
+  "disp": 6927,
+  "basis": "submerged",
+  "svc": 1976,
+  "src": "infobox",
+  "radars": [
+   {
+    "model": "AN/BPS-15",
+    "role": "navigation"
+   }
+  ],
+  "vls": [
+   {
+    "model": "VLS",
+    "cells": 12,
+    "raw": "12-tube VLS on Flight II/III (688i)"
+   }
+  ],
+  "weapons": [
+   {
+    "name": "21 in torpedo tubes (Mk 48 torpedo, Tomahawk, Harpoon, mines)",
+    "qty": 4,
+    "category": "torpedo"
+   }
+  ]
+ },
+ "Seawolf-class submarine": {
+  "disp": 9284,
+  "basis": "submerged",
+  "svc": 1997,
+  "src": "infobox (9,138 tons submerged, taken as long tons)",
+  "weapons": [
+   {
+    "name": "26.5 in torpedo tubes (up to 50 Mk 48 / Tomahawk / Harpoon)",
+    "qty": 8,
+    "category": "torpedo"
+   }
+  ]
+ },
+ "Virginia-class submarine": {
+  "disp": 10200,
+  "basis": "submerged",
+  "svc": 2004,
+  "src": "infobox (Block V)",
+  "vls": [
+   {
+    "model": "VLS / VPM",
+    "cells": 12,
+    "raw": "Block I–IV: 12 cells"
+   },
+   {
+    "model": "VLS / VPM",
+    "cells": 40,
+    "raw": "Block V–VI: 40 cells (4 VPM + 2 VPT)"
+   }
+  ],
+  "weapons": [
+   {
+    "name": "21 in torpedo tubes (Mk 48, Harpoon)",
+    "qty": 4,
+    "category": "torpedo"
+   }
+  ]
+ },
+ "America-class amphibious assault ship": {
+  "svc": 2014,
+  "src": "infobox",
+  "radars": [
+   {
+    "model": "AN/SPS-49",
+    "role": "air-search"
+   },
+   {
+    "model": "AN/SPS-48G",
+    "role": "air-search"
+   },
+   {
+    "model": "AN/SPQ-9B",
+    "role": "surface-search"
+   }
+  ],
+  "weapons": [
+   {
+    "name": "RIM-116 RAM launcher",
+    "qty": 2,
+    "category": "ciws"
+   },
+   {
+    "name": "RIM-162 ESSM launcher",
+    "qty": 2,
+    "category": "missile"
+   },
+   {
+    "name": "Phalanx CIWS",
+    "qty": 2,
+    "category": "ciws"
+   },
+   {
+    "name": "Mk 38 machine gun system",
+    "qty": 3,
+    "category": "gun"
+   },
+   {
+    "name": "dual .50 cal machine gun",
+    "qty": 7,
+    "category": "gun"
+   }
+  ]
+ },
+ "Wasp-class amphibious assault ship": {
+  "svc": 1989,
+  "src": "infobox",
+  "radars": [
+   {
+    "model": "AN/SPS-49",
+    "role": "air-search"
+   },
+   {
+    "model": "AN/SPS-48",
+    "role": "air-search"
+   },
+   {
+    "model": "AN/SPS-67",
+    "role": "surface-search"
+   }
+  ],
+  "weapons": [
+   {
+    "name": "RIM-116 RAM launcher",
+    "qty": 2,
+    "category": "ciws"
+   },
+   {
+    "name": "RIM-7 Sea Sparrow launcher",
+    "qty": 2,
+    "category": "missile"
+   },
+   {
+    "name": "Phalanx CIWS (LHD 5–8: 2)",
+    "qty": 3,
+    "category": "ciws"
+   },
+   {
+    "name": "Mk 38 25 mm (LHD 5–8: 3)",
+    "qty": 4,
+    "category": "gun"
+   },
+   {
+    "name": ".50 BMG machine gun",
+    "qty": 4,
+    "category": "gun"
+   }
+  ]
+ },
+ "San Antonio-class amphibious transport dock": {
+  "svc": 2006,
+  "src": "infobox",
+  "radars": [
+   {
+    "model": "AN/SPS-48G",
+    "role": "air-search"
+   },
+   {
+    "model": "AN/SPQ-9B",
+    "role": "surface-search"
+   }
+  ],
+  "weapons": [
+   {
+    "name": "Bushmaster II 30 mm gun",
+    "qty": 2,
+    "category": "gun"
+   },
+   {
+    "name": "RIM-116 RAM launcher",
+    "qty": 2,
+    "category": "ciws"
+   }
+  ]
+ },
+ "Blue Ridge-class command ship": {
+  "disp": 19176,
+  "basis": "full",
+  "svc": 1970,
+  "src": "infobox (18,874 long tons full load)"
+ }
+}

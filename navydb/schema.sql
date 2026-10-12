@@ -43,6 +43,7 @@ CREATE TABLE IF NOT EXISTS ship (
   commissioned TEXT,              -- ISO date or partial (YYYY-MM / YYYY)
   commissioned_raw TEXT,
   status TEXT,                    -- active / inactive / unknown
+  status_raw TEXT,                -- original wording from the source
   status_basis TEXT,              -- table | us-list | inferred (class count matches)
   source_page TEXT,               -- wikipedia page the row came from
   source_rev INTEGER
