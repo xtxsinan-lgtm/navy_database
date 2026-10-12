@@ -1,0 +1,32 @@
+{
+ "G-class frigate": {
+  "src": "infobox (8 Mk 41 cells, 32 ESSM quad-packed)",
+  "vls": [
+   {
+    "model": "Mk 41",
+    "cells": 8,
+    "raw": "8 cells"
+   }
+  ]
+ },
+ "Istanbul-class frigate": {
+  "src": "infobox (Istanbul; later ships may have more)",
+  "vls": [
+   {
+    "model": "MiDLAS",
+    "cells": 16,
+    "raw": "16-cell"
+   }
+  ]
+ },
+ "Hisar-class offshore patrol vessel": {
+  "src": "infobox (optional fit)",
+  "vls": [
+   {
+    "model": "MiDLAS",
+    "cells": 8,
+    "raw": "8 cells (optional)"
+   }
+  ]
+ }
+}

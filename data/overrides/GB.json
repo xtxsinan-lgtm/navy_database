@@ -1,0 +1,22 @@
+{
+ "Type 45 destroyer": {
+  "src": "infobox (24 Sea Ceptor silos to be fitted from 2026 not counted)",
+  "vls": [
+   {
+    "model": "Sylver A50",
+    "cells": 48,
+    "raw": "48 cells"
+   }
+  ]
+ },
+ "Type 23 frigate": {
+  "src": "infobox",
+  "vls": [
+   {
+    "model": "Sea Ceptor GWS 35",
+    "cells": 32,
+    "raw": "32-cell"
+   }
+  ]
+ }
+}

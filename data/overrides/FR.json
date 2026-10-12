@@ -1,0 +1,58 @@
+{
+ "French aircraft carrier Charles de Gaulle": {
+  "svc": 2001,
+  "src": "infobox",
+  "vls": [
+   {
+    "model": "Sylver A43",
+    "cells": 32,
+    "raw": "4 × 8 cells"
+   }
+  ]
+ },
+ "Horizon-class frigate": {
+  "src": "infobox",
+  "vls": [
+   {
+    "model": "Sylver A50",
+    "cells": 48,
+    "raw": "48 cells"
+   }
+  ]
+ },
+ "FREMM multipurpose frigate": {
+  "src": "infobox (French ASW variant: A43; MdCN A70)",
+  "vls": [
+   {
+    "model": "Sylver A43",
+    "cells": 16,
+    "raw": "16 cells (ASW variants)"
+   },
+   {
+    "model": "Sylver A70",
+    "cells": 16,
+    "raw": "16 cells for MdCN"
+   }
+  ]
+ },
+ "Amiral Ronarc'h-class frigate": {
+  "src": "infobox (first three: 2×8; last two: 4×8)",
+  "vls": [
+   {
+    "model": "Sylver A50",
+    "cells": 16,
+    "raw": "2 × 8 cells (32 on last two ships)"
+   }
+  ]
+ },
+ "Triomphant-class submarine": {
+  "src": "infobox; SLBM tubes",
+  "vls": [
+   {
+    "model": "M51 SLBM tubes",
+    "cells": 16,
+    "raw": "16 tubes"
+   }
+  ]
+ }
+}

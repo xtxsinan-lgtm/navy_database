@@ -1,0 +1,102 @@
+{
+ "Vikrant-class aircraft carrier": {
+  "src": "infobox",
+  "vls": [
+   {
+    "model": "Barak 8 VLS",
+    "cells": 32,
+    "raw": "2 × 16"
+   }
+  ]
+ },
+ "Delhi-class destroyer": {
+  "src": "infobox",
+  "vls": [
+   {
+    "model": "Barak 1 VLS",
+    "cells": 32,
+    "raw": "32 missiles"
+   }
+  ]
+ },
+ "Kolkata-class destroyer": {
+  "src": "infobox",
+  "vls": [
+   {
+    "model": "Barak 8 VLS",
+    "cells": 32,
+    "raw": "4 × 8"
+   },
+   {
+    "model": "BrahMos VLS",
+    "cells": 16,
+    "raw": "2 × 8"
+   }
+  ]
+ },
+ "Visakhapatnam-class destroyer": {
+  "src": "infobox",
+  "vls": [
+   {
+    "model": "Barak 8 VLS",
+    "cells": 32,
+    "raw": "4 × 8"
+   },
+   {
+    "model": "BrahMos VLS",
+    "cells": 16,
+    "raw": "2 × 8"
+   }
+  ]
+ },
+ "Shivalik-class frigate": {
+  "src": "infobox",
+  "vls": [
+   {
+    "model": "Barak 1 VLS",
+    "cells": 32,
+    "raw": "32-cell"
+   },
+   {
+    "model": "BrahMos VLS",
+    "cells": 8,
+    "raw": "8 cells"
+   }
+  ]
+ },
+ "Brahmaputra-class frigate": {
+  "src": "infobox",
+  "vls": [
+   {
+    "model": "Barak 1 VLS",
+    "cells": 24,
+    "raw": "3 × 8"
+   }
+  ]
+ },
+ "Godavari-class frigate": {
+  "src": "infobox",
+  "vls": [
+   {
+    "model": "Barak 1 VLS",
+    "cells": 24,
+    "raw": "3 × 8"
+   }
+  ]
+ },
+ "Nilgiri-class frigate (2019)": {
+  "src": "infobox",
+  "vls": [
+   {
+    "model": "Barak 8 VLS",
+    "cells": 32,
+    "raw": "4 × 8"
+   },
+   {
+    "model": "BrahMos VLS",
+    "cells": 8,
+    "raw": "1 × 8"
+   }
+  ]
+ }
+}

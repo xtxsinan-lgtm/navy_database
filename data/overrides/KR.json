@@ -1,0 +1,92 @@
+{
+ "Sejong the Great-class destroyer": {
+  "src": "infobox (Batch I; Batch II differs)",
+  "vls": [
+   {
+    "model": "Mk 41",
+    "cells": 80,
+    "raw": "48 + 32 cells"
+   },
+   {
+    "model": "K-VLS",
+    "cells": 48,
+    "raw": "48 cells"
+   }
+  ]
+ },
+ "Chungmugong Yi Sun-sin-class destroyer": {
+  "src": "infobox",
+  "vls": [
+   {
+    "model": "Mk 41",
+    "cells": 32,
+    "raw": "32-cell"
+   },
+   {
+    "model": "K-VLS",
+    "cells": 24,
+    "raw": "24-cell"
+   }
+  ]
+ },
+ "Gwanggaeto the Great-class destroyer": {
+  "src": "infobox",
+  "vls": [
+   {
+    "model": "Mk 48 Mod 2",
+    "cells": 16,
+    "raw": "16 cells"
+   }
+  ]
+ },
+ "Daegu-class frigate": {
+  "src": "infobox",
+  "vls": [
+   {
+    "model": "K-VLS",
+    "cells": 16,
+    "raw": "16-cell"
+   }
+  ]
+ },
+ "Chungnam-class frigate": {
+  "src": "infobox",
+  "vls": [
+   {
+    "model": "K-VLS",
+    "cells": 16,
+    "raw": "16-cell"
+   }
+  ]
+ },
+ "Dosan Ahn Changho-class submarine": {
+  "src": "infobox (Batch I: 6; Batch II: 10)",
+  "vls": [
+   {
+    "model": "K-VLS",
+    "cells": 6,
+    "raw": "Batch I: 6 cells; Batch II: 10"
+   }
+  ]
+ },
+ "Dokdo-class amphibious assault ship": {
+  "src": "infobox (LPH-6112)",
+  "vls": [
+   {
+    "model": "K-VLS",
+    "cells": 4,
+    "raw": "4 cells on LPH-6112"
+   }
+  ]
+ },
+ "Cheon Wang Bong-class LST": {
+  "src": "infobox",
+  "vls": [
+   {
+    "model": "K-VLS compact",
+    "cells": 4,
+    "raw": "4-cell"
+   }
+  ]
+ }
+}

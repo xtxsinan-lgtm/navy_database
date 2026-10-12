@@ -1,0 +1,105 @@
+{
+ "Hyūga-class helicopter destroyer": {
+  "src": "infobox",
+  "vls": [
+   {
+    "model": "Mk 41",
+    "cells": 16,
+    "raw": "16 cells"
+   }
+  ]
+ },
+ "Kongō-class destroyer": {
+  "src": "infobox",
+  "vls": [
+   {
+    "model": "Mk 41",
+    "cells": 90,
+    "raw": "90-cell"
+   }
+  ]
+ },
+ "Atago-class destroyer": {
+  "src": "infobox",
+  "vls": [
+   {
+    "model": "Mk 41",
+    "cells": 96,
+    "raw": "96-cell"
+   }
+  ]
+ },
+ "Maya-class destroyer": {
+  "src": "infobox",
+  "vls": [
+   {
+    "model": "Mk 41",
+    "cells": 96,
+    "raw": "64 + 32 cells"
+   }
+  ]
+ },
+ "Asahi-class destroyer": {
+  "src": "infobox",
+  "vls": [
+   {
+    "model": "Mk 41",
+    "cells": 32,
+    "raw": "32-cell"
+   }
+  ]
+ },
+ "Akizuki-class destroyer (2010)": {
+  "src": "infobox",
+  "vls": [
+   {
+    "model": "Mk 41",
+    "cells": 32,
+    "raw": "32-cell"
+   }
+  ]
+ },
+ "Takanami-class destroyer": {
+  "src": "infobox",
+  "vls": [
+   {
+    "model": "Mk 41",
+    "cells": 32,
+    "raw": "32-cell"
+   }
+  ]
+ },
+ "Murasame-class destroyer (1994)": {
+  "src": "infobox",
+  "vls": [
+   {
+    "model": "Mk 48",
+    "cells": 16,
+    "raw": "16-cell, ESSM"
+   },
+   {
+    "model": "Mk 41",
+    "cells": 16,
+    "raw": "16-cell, VL-ASROC"
+   }
+  ]
+ },
+ "Asagiri-class destroyer": {
+  "src": "infobox",
+  "vls": []
+ },
+ "Mogami-class frigate": {
+  "src": "infobox",
+  "vls": [
+   {
+    "model": "Mk 41",
+    "cells": 16,
+    "raw": "16 cells"
+   }
+  ]
+ },
+ "Izumo-class destroyer": {
+  "src": "infobox",
+  "vls": []
+ }
+}

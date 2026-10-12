@@ -1,0 +1,178 @@
+{
+ "Russian aircraft carrier Admiral Kuznetsov": {
+  "svc": 1990,
+  "src": "infobox",
+  "vls": [
+   {
+    "model": "3K95 Kinzhal",
+    "cells": 192,
+    "raw": "24 × 8-cell"
+   },
+   {
+    "model": "P-700 Granit silo",
+    "cells": 12,
+    "raw": "12 deck silos"
+   }
+  ]
+ },
+ "Kirov-class battlecruiser": {
+  "src": "infobox (Pyotr Velikiy: 96 S-300F + 64 Kinzhal)",
+  "vls": [
+   {
+    "model": "P-700 Granit silo",
+    "cells": 20,
+    "raw": "20 silos"
+   },
+   {
+    "model": "S-300F/FM Fort",
+    "cells": 96,
+    "raw": "96 missiles in revolver launchers"
+   },
+   {
+    "model": "3K95 Kinzhal",
+    "cells": 64,
+    "raw": "8 × 8, Pyotr Velikiy only"
+   }
+  ]
+ },
+ "Slava-class cruiser": {
+  "src": "infobox",
+  "vls": [
+   {
+    "model": "S-300F Fort",
+    "cells": 64,
+    "raw": "8 × 8 revolver launchers"
+   }
+  ]
+ },
+ "Udaloy-class destroyer": {
+  "src": "infobox",
+  "vls": [
+   {
+    "model": "3K95 Kinzhal",
+    "cells": 64,
+    "raw": "8 × 8"
+   }
+  ]
+ },
+ "Sovremenny-class destroyer": {
+  "src": "infobox, Russian version",
+  "vls": [],
+  "weapons": [
+   {
+    "name": "AK-130 130 mm twin gun",
+    "qty": 2,
+    "category": "gun"
+   },
+   {
+    "name": "AK-630 30 mm CIWS",
+    "qty": 4,
+    "category": "ciws"
+   },
+   {
+    "name": "P-270 Moskit (SS-N-22) launcher, 2 × 4",
+    "qty": 8,
+    "category": "missile"
+   },
+   {
+    "name": "Shtil-1 / Uragan SAM launcher",
+    "qty": 2,
+    "category": "missile"
+   },
+   {
+    "name": "533 mm torpedo tubes",
+    "qty": 4,
+    "category": "torpedo"
+   }
+  ]
+ },
+ "Admiral Gorshkov-class frigate": {
+  "src": "infobox",
+  "vls": [
+   {
+    "model": "3S-14 UKSK",
+    "cells": 16,
+    "raw": "Project 22350: 2 × 8"
+   },
+   {
+    "model": "3S14M UKSK",
+    "cells": 32,
+    "raw": "upgraded 22350M: 4 × 8"
+   },
+   {
+    "model": "Redut",
+    "cells": 32,
+    "raw": "4 × 8 S-350-family SAM"
+   }
+  ]
+ },
+ "Admiral Grigorovich-class frigate": {
+  "src": "infobox",
+  "vls": [
+   {
+    "model": "UKSK",
+    "cells": 8,
+    "raw": "2 × 4"
+   },
+   {
+    "model": "3S90M Shtil-1",
+    "cells": 24,
+    "raw": "2 × 12"
+   }
+  ]
+ },
+ "Neustrashimy-class frigate": {
+  "src": "infobox",
+  "vls": [
+   {
+    "model": "SA-N-9 VLS",
+    "cells": 32,
+    "raw": "4 × 8"
+   }
+  ]
+ },
+ "Gepard-class frigate": {
+  "src": "infobox",
+  "vls": [
+   {
+    "model": "UKSK",
+    "cells": 8,
+    "raw": "8 cells (Dagestan); export option up to 16"
+   }
+  ]
+ },
+ "Karakurt-class corvette": {
+  "src": "infobox",
+  "vls": [
+   {
+    "model": "UKSK",
+    "cells": 8,
+    "raw": "2 × 4"
+   }
+  ]
+ },
+ "Yasen-class submarine": {
+  "src": "infobox (8 silos; 5 Kalibr or 4 Oniks/Zircon each)",
+  "vls": [
+   {
+    "model": "3S-14",
+    "cells": 8,
+    "raw": "8 silos"
+   }
+  ]
+ },
+ "Oscar-class submarine": {
+  "src": "infobox",
+  "vls": [
+   {
+    "model": "P-700 Granit tubes",
+    "cells": 24,
+    "raw": "24 launch tubes"
+   }
+  ]
+ },
+ "Tarantul-class corvette": {
+  "svc": 1979,
+  "src": "manual: infobox service range mis-parsed (2025)"
+ }
+}
